@@ -1454,11 +1454,11 @@ function bulletTex(col,col2,col3,d,seed,moving){const bio=(LV&&LV.biome)||'city'
   cx.drawImage(A,0,0);brand(cx,(nl+1.7)*pxM,1);
   cx.save();cx.translate(W*2,0);cx.scale(-1,1);cx.drawImage(A,0,0);cx.restore();brand(cx,W*2-(nl+1.7)*pxM,-1);
   const tex=new THREE.CanvasTexture(C);tex.colorSpace=THREE.SRGBColorSpace;tex.anisotropy=8;return _btTex[key]=tex;}
-const btGlass=new THREE.MeshPhysicalMaterial({color:'#0b1220',roughness:.04,metalness:.6,clearcoat:1,clearcoatRoughness:.02,envMapIntensity:2.2});
+const btGlass=new THREE.MeshStandardMaterial({color:'#0b1220',roughness:.06,metalness:.7,envMapIntensity:2.2});
 const btSkirt=new THREE.MeshStandardMaterial({color:'#2a2e36',roughness:.6,metalness:.5});
 const _btMat={};
 function bulletMat(o){const t=bulletTex(o.col[0],o.col[1],o.col[2],o.d,o.seed||.37,!!o.moving);const k=t.uuid;if(_btMat[k])return _btMat[k];
-  return _btMat[k]=new THREE.MeshPhysicalMaterial({map:t,roughness:.26,metalness:.12,clearcoat:1,clearcoatRoughness:.06,envMapIntensity:1.35,sheen:0});}
+  return _btMat[k]=new THREE.MeshStandardMaterial({map:t,roughness:.2,metalness:.15,envMapIntensity:1.5});}
 function makeBulletTrain(o,g){const nose=!!o.moving||!o.ramp;const G2=bulletGeos(o.d,nose);
   const body=new THREE.Mesh(G2.body,bulletMat(o));body.castShadow=body.receiveShadow=true;g.add(body);
   g.add(new THREE.Mesh(G2.wind,btGlass));
@@ -1473,7 +1473,7 @@ function makeBulletTrain(o,g){const nose=!!o.moving||!o.ramp;const G2=bulletGeos
     const hd=new THREE.Mesh(G.box,darkMetal);hd.scale.set(.55,.02,.04);hd.position.set(0,TH+.24,-o.d*.45+.32);g.add(hd);}
   const nl=nose?BT.nose:BT.cap;
   if(Math.random()<.7&&o.d-nl-1.6>2.2){const L=Math.min(2.3,o.d-nl-2.2),az=-(nl+1.6+Math.random()*Math.max(.05,o.d-nl-2.2-L))-L/2;const rr=Math.random();const tx=rr<.3?fcAdTex('wrap'):rr<.65?thumbTex(Math.floor(Math.random()*THUMBS.length),'wrap'):msgWrapTex(o.moving?'FAME EXPRESS':pick(TRAIN_MSGS));
-    const am=new THREE.MeshPhysicalMaterial({map:tx,roughness:.3,metalness:.05,clearcoat:1,clearcoatRoughness:.08,emissive:'#ffffff',emissiveMap:tx,emissiveIntensity:.22});
+    const am=new THREE.MeshStandardMaterial({map:tx,roughness:.25,metalness:.05,emissive:'#ffffff',emissiveMap:tx,emissiveIntensity:.22});
     const r0=btRing(az,o.d,nose);for(const side of [-1,1]){const ad=new THREE.Mesh(new THREE.PlaneGeometry(L,L*288/1024*.85),am);const y=.72;const [x]=btPoint(r0,side>0?Math.PI/2-.05:Math.PI*1.5+.05,0);ad.position.set(side*(Math.abs(x)+.006),y,az);ad.rotation.y=side*Math.PI/2;g.add(ad);}}
   if(o.moving){const bm=new THREE.Mesh(new THREE.PlaneGeometry(1.7,10),new THREE.MeshBasicMaterial({map:glowTex,color:'#eaf4ff',transparent:true,opacity:.35,depthWrite:false,blending:THREE.AdditiveBlending}));bm.rotation.x=-Math.PI/2;bm.position.set(0,.03,5);g.add(bm);
     for(const hx of [-.24,.24]){const hl=new THREE.Sprite(new THREE.SpriteMaterial({map:glowTex,color:'#eaf4ff',transparent:true,depthWrite:false,blending:THREE.AdditiveBlending}));hl.scale.set(1.1,.6,1);hl.position.set(hx,.5,-.55);g.add(hl);}}
