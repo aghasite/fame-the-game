@@ -1362,7 +1362,7 @@ function fcLabel(flavor,col){return canvasTex(1024,512,(g,w,h)=>{const bg=g.crea
 const _fcL={};
 function makeFightBottle(flavor){const key=flavor||'kp';const lab=_fcL[key]||(_fcL[key]=key==='cc'?fcLabel('CITRUS CRUSH','#ff7a2e'):fcLabel('KNOCKOUT PUNCH','#e8202f'));
   const prof=[[0,0],[.15,0],[.17,.03],[.17,.16],[.155,.2],[.17,.25],[.17,.5],[.15,.58],[.115,.64],[.115,.66]];
-  const body=new THREE.Mesh(new THREE.LatheGeometry(prof.map(([x,y])=>new THREE.Vector2(x,y)),48),new THREE.MeshStandardMaterial({map:lab,roughness:.18,metalness:.25,envMapIntensity:1.4}));
+  const body=new THREE.Mesh(new THREE.LatheGeometry(prof.map(([x,y])=>new THREE.Vector2(x,y)),48),new THREE.MeshStandardMaterial({map:lab,roughness:.18,metalness:.25,envMapIntensity:1.4,emissive:'#ffffff',emissiveMap:lab,emissiveIntensity:.55}));
   const cap=new THREE.Mesh(new THREE.CylinderGeometry(.12,.125,.15,40),new THREE.MeshStandardMaterial({color:'#0b0b0b',roughness:.25,metalness:.3}));cap.position.y=.735;
   const ring=new THREE.Mesh(new THREE.TorusGeometry(.124,.006,6,40),new THREE.MeshStandardMaterial({color:'#d9a441',metalness:1,roughness:.25}));ring.rotation.x=Math.PI/2;ring.position.y=.665;
   const g=new THREE.Group();g.add(body,cap,ring);return g;}
@@ -2194,7 +2194,7 @@ $('nowplaying').onclick=e=>{e.stopPropagation();initAudio();
 setMuted(S.muted);
 
 // character select
-function refreshChar(anim){const c=CHARS.find(x=>x.id===S.char)||CHARS[0];const lk=charLocked(c);$('charName').classList.toggle('locked',lk);$('charName').querySelector('b').textContent=c.name;$('charName').querySelector('small').textContent=c.sub;const lvn=c.unlockLv?(lvById(c.unlockLv)||{}).name:'';$('charName').querySelector('em').textContent=lk?(c.legend?`🔒 Clear ${lvn} on the World Tour — or unlock for ${fmt(c.cost)} coins`:'🔒 Sign '+c.name.split(' ')[0]+' in the Label tab to unlock'):'★ '+c.perk;$('playBtn').innerHTML=lk?(c.legend?ic('unlock','#1a0b2e','play')+'<span>UNLOCK</span>':ic('lock','#1a0b2e','play')+'<span>LOCKED</span>'):ic('play','#1a0b2e','play')+'<span>RUN</span>';$('tributeBtn').classList.toggle('on',!!(c.tribute||c.tribute2));$('tributeBtn').textContent=c.tribute2?'🕯️ In memory · '+c.sub.split('·')[1].trim():'🕯️ In memory · 1964–2017';
+function refreshChar(anim){const c=CHARS.find(x=>x.id===S.char)||CHARS[0];const lk=charLocked(c);$('charName').classList.toggle('locked',lk);$('charName').querySelector('b').textContent=c.name;$('charName').querySelector('small').textContent=c.sub;const lvn=c.unlockLv?(lvById(c.unlockLv)||{}).name:'';$('charName').querySelector('em').textContent=lk?(c.legend?`🔒 Clear ${lvn} on the World Tour — or unlock for ${fmt(c.cost)} coins`:'🔒 Sign '+c.name+' in the Studio to unlock'):'★ '+c.perk;$('playBtn').innerHTML=lk?(c.legend?ic('unlock','#1a0b2e','play')+'<span>UNLOCK</span>':ic('lock','#1a0b2e','play')+'<span>LOCKED</span>'):ic('play','#1a0b2e','play')+'<span>RUN</span>';$('tributeBtn').classList.toggle('on',!!(c.tribute||c.tribute2));$('tributeBtn').textContent=c.tribute2?'🕯️ In memory · '+c.sub.split('·')[1].trim():'🕯️ In memory · 1964–2017';
   if(anim)rebuildChar();}
 function switchChar(d){const i=CHARS.findIndex(x=>x.id===S.char);S.char=CHARS[(i+d+CHARS.length)%CHARS.length].id;applyLook();refreshChar(true);try{refreshMenu();}catch(e){}sfxClick();save();
   const c=CHARS.find(x=>x.id===S.char);
