@@ -1315,7 +1315,7 @@ const skyMat=new THREE.ShaderMaterial({uniforms:skyU2,fog:false,vertexShader:'va
    float up=clamp(vN.y,0.,1.);c=mix(c,mix(haze,hi,.5)*.55,glass*.35*(1.-night*.6));c=mix(c,wall*1.4,up*.5);
    float flick=step(.985,fract(sin(dot(floor(vUv*vec2(16.,48.)),vec2(12.9,78.2)))*43758.5+time*.02));
    vec3 wc=mix(vec3(1.,.74,.42),vec3(.72,.86,1.),step(.62,fract(t.r*9.)))*t.g*win*(.55+.45*night)*(1.-.6*flick);
-   c+=wc;float dist=length(vW.xz);float hz=clamp((dist-180.)/220.,0.,1.)*.55+.35*(1.-smoothstep(0.,60.,vW.y));c=mix(c,haze*(.7+.3*(1.-night)),clamp(hz,0.,.85)*(1.-night*.45));
+   c+=wc;float dist=length(vW.xz);float hz=clamp((dist-200.)/200.,0.,1.)*.32+.22*(1.-smoothstep(0.,45.,vW.y));c=mix(c,mix(haze,wall,.35)*(.75+.25*(1.-night)),clamp(hz,0.,.55)*(1.-night*.5));
    gl_FragColor=vec4(c,1.);
 #include <tonemapping_fragment>
 #include <colorspace_fragment>

@@ -6,6 +6,21 @@
 <meta name="theme-color" content="#0b0618">
 <meta name="description" content="Fame the Game — run the Cape Coral tracks, stack coins and build Fame Records into an empire.">
 <title>Fame the Game</title>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Fame the Game">
+<meta property="og:title" content="FAME THE GAME — Run the City. Chase the Crown.">
+<meta property="og:description" content="Bullet trains, chopper chases and Miami bass. Play as Fame Faiella, Fresh Kid Ice, Snoop, Biggie, 2Pac and Young CEO — free in your browser.">
+<meta property="og:url" content="https://aghanoorahmedkhan.com/fame-the-game/">
+<meta property="og:image" content="https://aghanoorahmedkhan.com/fame-the-game/og-cover.jpg">
+<meta property="og:image:secure_url" content="https://aghanoorahmedkhan.com/fame-the-game/og-cover.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Fame the Game — gold crown logo over a neon city and a Fame Faiella bullet train">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FAME THE GAME — Run the City. Chase the Crown.">
+<meta name="twitter:description" content="Bullet trains, chopper chases and Miami bass. Free in your browser.">
+<meta name="twitter:image" content="https://aghanoorahmedkhan.com/fame-the-game/og-cover.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23fff3b0'/%3E%3Cstop offset='1' stop-color='%23ff8a3d'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%231a0b2e'/%3E%3Cpath d='M14 22l8 7 10-12 10 12 8-7-3 16H17z' fill='url(%23g)'/%3E%3Ctext x='32' y='58' font-family='Arial Black,Arial' font-weight='900' font-size='19' text-anchor='middle' fill='url(%23g)'%3EFAME%3C/text%3E%3C/svg%3E">
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 <link rel="manifest" href="manifest.json">
@@ -13,7 +28,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Bungee&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{width:100%;height:100%;overflow:hidden;background:radial-gradient(ellipse at center,#1d0c3a 0%,#07030f 70%);font-family:'Outfit',system-ui,sans-serif;color:#fff;user-select:none;-webkit-user-select:none;touch-action:none;overscroll-behavior:none}
@@ -24,7 +39,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:radial-gradient(elli
 /* screens fade + scale */
 .screen{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;opacity:0;visibility:hidden;transform:scale(1.04);transition:opacity .4s ease,transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s linear .45s;pointer-events:none}
 .screen.on{opacity:1;visibility:visible;transform:none;transition:opacity .4s ease,transform .45s cubic-bezier(.2,.8,.2,1),visibility 0s;pointer-events:auto}
-.btn{position:relative;font-family:'Bungee',sans-serif;font-size:22px;border:none;border-radius:18px;padding:14px 26px;cursor:pointer;color:#1a0b2e;background:linear-gradient(180deg,#fff0a0,#ffd23f 45%,#f5a623);box-shadow:0 6px 0 #a8701a,0 12px 30px rgba(0,0,0,.45),inset 0 2px 0 rgba(255,255,255,.7);transition:transform .12s cubic-bezier(.3,1.6,.5,1),box-shadow .12s,filter .2s;overflow:hidden}
+.btn{position:relative;font-family:'Russo One',sans-serif;font-size:22px;border:none;border-radius:18px;padding:14px 26px;cursor:pointer;color:#1a0b2e;background:linear-gradient(180deg,#fff0a0,#ffd23f 45%,#f5a623);box-shadow:0 6px 0 #a8701a,0 12px 30px rgba(0,0,0,.45),inset 0 2px 0 rgba(255,255,255,.7);transition:transform .12s cubic-bezier(.3,1.6,.5,1),box-shadow .12s,filter .2s;overflow:hidden}
 .btn::after{content:'';position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:shine 3.2s ease-in-out infinite}
 .btn.ghost::after,.btn.sm::after,.btn.icon::after{display:none}
 @keyframes shine{0%,60%{left:-60%}100%{left:130%}}
@@ -61,12 +76,12 @@ html,body{width:100%;height:100%;overflow:hidden;background:radial-gradient(elli
 #lvBar .b{height:8px;border-radius:5px;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.18);overflow:hidden;margin-top:4px}
 #lvBar .b i{display:block;height:100%;width:0;background:linear-gradient(90deg,#3ddc97,#ffd23f);box-shadow:0 0 10px #ffd23f}
 .lvtabs{display:flex;gap:6px;margin:10px 0}
-.lvtabs button{flex:1;border:none;border-radius:12px;padding:9px;font:700 13px Bungee,sans-serif;background:rgba(255,255,255,.08);color:#cbb8f0;cursor:pointer}
+.lvtabs button{flex:1;border:none;border-radius:12px;padding:9px;font:700 13px 'Russo One',sans-serif;background:rgba(255,255,255,.08);color:#cbb8f0;cursor:pointer}
 .lvtabs button.on{background:linear-gradient(180deg,#ffd23f,#f5a623);color:#1a0b2e}
 .lvgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;max-height:470px;overflow-y:auto;padding:2px;touch-action:pan-y}
 .lv{border:none;border-radius:14px;padding:8px 3px 7px;background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.04));color:#fff;cursor:pointer;font-family:Outfit;position:relative;transition:transform .12s}
 .lv:active{transform:scale(.95)}
-.lv b{display:block;font-family:Bungee;font-size:17px;line-height:1.1}
+.lv b{display:block;font-family:'Russo One';font-size:17px;line-height:1.1}
 .lv span{display:block;font-size:9.5px;font-weight:700;opacity:.8;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .lv em{display:block;font-style:normal;font-size:10px;color:#ffd23f;margin-top:2px;letter-spacing:1px}
 .lv.lock{opacity:.4;filter:grayscale(.8)}
@@ -78,7 +93,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:radial-gradient(elli
 #hud{position:absolute;inset:0;pointer-events:none;opacity:0;transform:translateY(-10px);transition:opacity .4s,transform .4s}
 #hud.on{opacity:1;transform:none}
 #hud .tl{position:absolute;top:12px;left:14px}
-#hScore{font-family:'Bungee';font-size:30px;line-height:1;text-shadow:0 3px 0 rgba(0,0,0,.45),0 0 18px rgba(255,255,255,.25)}
+#hScore{font-family:'Russo One';font-size:30px;line-height:1;text-shadow:0 3px 0 rgba(0,0,0,.45),0 0 18px rgba(255,255,255,.25)}
 #hMult{display:inline-block;margin-left:6px;vertical-align:top;font:800 13px Outfit;background:linear-gradient(180deg,#ff9fd6,#d63c95);padding:3px 7px;border-radius:8px;box-shadow:0 0 12px rgba(255,95,176,.6)}
 #hDist{font:600 12px Outfit;opacity:.8;letter-spacing:1px;margin-top:4px}
 #hud .tr{position:absolute;top:12px;right:62px}
@@ -97,22 +112,22 @@ html,body{width:100%;height:100%;overflow:hidden;background:radial-gradient(elli
 #hypeBtn.on{display:block;animation:popin .35s cubic-bezier(.3,1.6,.5,1)}
 #hypeBtn i{position:absolute;left:0;bottom:0;height:4px;background:#fff;opacity:.8}
 /* big center text */
-#big{position:absolute;left:0;right:0;top:300px;text-align:center;font-family:'Bungee';font-size:64px;color:#fff;pointer-events:none;opacity:0;text-shadow:0 5px 0 #6a1d5a,0 0 30px rgba(255,120,200,.9)}
+#big{position:absolute;left:0;right:0;top:300px;text-align:center;font-family:'Russo One';font-size:64px;color:#fff;pointer-events:none;opacity:0;text-shadow:0 5px 0 #6a1d5a,0 0 30px rgba(255,120,200,.9)}
 #big.go{animation:bigpop .9s cubic-bezier(.2,1.4,.4,1) forwards}
 #big small{display:block;font-size:20px;color:#ffd23f;text-shadow:0 3px 0 #000}
 @keyframes bigpop{0%{opacity:0;transform:scale(2.4)}25%{opacity:1;transform:scale(1)}75%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.8) translateY(-30px)}}
-#hint{position:absolute;left:0;right:0;top:470px;text-align:center;font-family:'Bungee';font-size:22px;color:#ffd23f;text-shadow:0 3px 0 #000,0 0 14px rgba(255,210,63,.7);pointer-events:none;opacity:0;transition:opacity .25s}
+#hint{position:absolute;left:0;right:0;top:470px;text-align:center;font-family:'Russo One';font-size:22px;color:#ffd23f;text-shadow:0 3px 0 #000,0 0 14px rgba(255,210,63,.7);pointer-events:none;opacity:0;transition:opacity .25s}
 #hint.on{opacity:1;animation:hintb .6s ease-in-out infinite alternate}
 @keyframes hintb{to{transform:translateY(-8px)}}
 /* panels */
 .dim{background:rgba(8,3,20,.66);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);justify-content:center}
 .panel{background:linear-gradient(180deg,rgba(52,26,102,.96),rgba(23,10,48,.97));border:1px solid rgba(255,210,90,.35);border-radius:26px;box-shadow:0 30px 80px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.12);transform:translateY(20px) scale(.96);transition:transform .45s cubic-bezier(.2,1.3,.4,1)}
 .screen.on .panel{transform:none}
-.panel h2{font-family:'Bungee';font-size:32px;background:linear-gradient(180deg,#fff,#ff9fd6);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 3px 0 #4a0f35)}
+.panel h2{font-family:'Russo One';font-size:32px;background:linear-gradient(180deg,#fff,#ff9fd6);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 3px 0 #4a0f35)}
 #over .panel,#pause .panel,#revive .panel,#modal .panel{width:392px;padding:24px 22px;text-align:center}
 .stats{margin:14px 0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .stat{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:10px}
-.stat b{display:block;font-family:'Bungee';font-size:24px;color:#ffd23f}
+.stat b{display:block;font-family:'Russo One';font-size:24px;color:#ffd23f}
 .stat.wide{grid-column:span 2}.stat.wide b{font-size:34px;color:#fff;text-shadow:0 0 16px rgba(255,255,255,.4)}
 .stat span{font-size:11px;opacity:.7;text-transform:uppercase;letter-spacing:1px}
 .tipbox{background:rgba(110,200,255,.1);border-left:4px solid #6fd3ff;border-radius:12px;padding:10px 12px;text-align:left;font-size:13px;line-height:1.45;margin-bottom:16px;color:#dff4ff}
@@ -120,16 +135,16 @@ html,body{width:100%;height:100%;overflow:hidden;background:radial-gradient(elli
 .row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
 .ring{width:120px;height:120px;margin:16px auto;position:relative}
 .ring>svg{transform:rotate(-90deg)}
-.ring b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:Bungee;font-size:40px}
+.ring b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Russo One';font-size:40px}
 .mis{display:flex;gap:10px;align-items:center;text-align:left;background:rgba(255,255,255,.06);border-radius:14px;padding:10px 12px;margin-bottom:8px}
 .mis .ic{font-size:22px}
 .mis .tx{flex:1;font-size:13.5px;font-weight:600}
 .mis .pb{height:7px;border-radius:4px;background:rgba(255,255,255,.12);margin-top:6px;overflow:hidden}
 .mis .pb i{display:block;height:100%;background:linear-gradient(90deg,#3ddc97,#9ff3ff);border-radius:4px;transition:width .6s}
 .mis small{font-size:11px;opacity:.65}
-.multbadge{display:inline-block;font-family:Bungee;font-size:26px;background:linear-gradient(180deg,#ff9fd6,#d63c95);padding:4px 14px;border-radius:14px;margin:6px 0 12px;box-shadow:0 0 22px rgba(255,95,176,.5)}
+.multbadge{display:inline-block;font-family:'Russo One';font-size:26px;background:linear-gradient(180deg,#ff9fd6,#d63c95);padding:4px 14px;border-radius:14px;margin:6px 0 12px;box-shadow:0 0 22px rgba(255,95,176,.5)}
 .lb{display:flex;justify-content:space-between;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.05);margin-bottom:6px;font-weight:600}
-.lb b{font-family:Bungee;color:#ffd23f}
+.lb b{font-family:'Russo One';color:#ffd23f}
 .days{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:14px 0}
 .day{border-radius:12px;padding:8px 2px;background:rgba(255,255,255,.07);font-size:11px;font-weight:800}
 .day b{display:block;font-size:13px;color:#ffd23f;margin-top:3px}
@@ -141,9 +156,9 @@ html,body{width:100%;height:100%;overflow:hidden;background:radial-gradient(elli
 /* studio */
 #studio{background:linear-gradient(180deg,#1d0c3a,#0e0620)}
 .shead{width:100%;display:flex;align-items:center;justify-content:space-between;padding:14px 14px 8px}
-.shead h2{font-family:'Bungee';font-size:20px;background:linear-gradient(180deg,#fff3b0,#ffc83d);-webkit-background-clip:text;background-clip:text;color:transparent}
+.shead h2{font-family:'Russo One';font-size:20px;background:linear-gradient(180deg,#fff3b0,#ffc83d);-webkit-background-clip:text;background-clip:text;color:transparent}
 .tabs{display:flex;gap:5px;padding:0 14px;width:100%;position:relative}
-.tab{flex:1;font-family:'Bungee';font-size:11.5px;padding:10px 0;border-radius:13px 13px 0 0;border:none;background:rgba(255,255,255,.06);color:#cbb8f0;cursor:pointer;transition:background .25s,color .25s}
+.tab{flex:1;font-family:'Russo One';font-size:11.5px;padding:10px 0;border-radius:13px 13px 0 0;border:none;background:rgba(255,255,255,.06);color:#cbb8f0;cursor:pointer;transition:background .25s,color .25s}
 .tab.on{background:#2a1452;color:#ffd23f}
 .tabbody{flex:1;width:calc(100% - 28px);background:#2a1452;border-radius:0 0 18px 18px;overflow-y:auto;padding:12px;margin-bottom:14px;touch-action:pan-y}
 .tabbody.anim>*{animation:slidein .4s cubic-bezier(.2,.9,.3,1) both}
@@ -162,10 +177,10 @@ html,body{width:100%;height:100%;overflow:hidden;background:radial-gradient(elli
 .costbtn{display:flex;align-items:center;gap:5px;white-space:nowrap}
 .costbtn .coin{width:15px;height:15px}
 .label-top{display:flex;justify-content:space-between;align-items:center;background:rgba(0,0,0,.25);border-radius:16px;padding:12px;margin-bottom:10px}
-.label-top .big{font-family:'Bungee';font-size:19px;color:#9fe8ff}
+.label-top .big{font-family:'Russo One';font-size:19px;color:#9fe8ff}
 .label-top small{display:block;font-size:11px;opacity:.7;text-transform:uppercase;letter-spacing:1px}
-.ava{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bungee';font-size:18px;color:#1a0b2e;flex:none;box-shadow:0 0 14px rgba(255,255,255,.2)}
-.section{font-family:'Bungee';font-size:12.5px;color:#cbb8f0;margin:12px 2px 8px;letter-spacing:1px}
+.ava{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Russo One';font-size:18px;color:#1a0b2e;flex:none;box-shadow:0 0 14px rgba(255,255,255,.2)}
+.section{font-family:'Russo One';font-size:12.5px;color:#cbb8f0;margin:12px 2px 8px;letter-spacing:1px}
 .track.on{outline:2px solid #ffd23f;box-shadow:0 0 20px rgba(255,210,63,.25)}
 .fact{font-size:12px;color:#bfe9ff;margin-top:4px;line-height:1.35}
 .swatch{width:46px;height:46px;border-radius:13px;flex:none;position:relative;overflow:hidden;box-shadow:inset 0 0 0 2px rgba(255,255,255,.2)}
@@ -180,7 +195,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:radial-gradient(elli
 body.playing #toast{top:150px;width:400px;font-size:12.5px}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0) scale(1);pointer-events:auto}
 #toast b{color:#ffd23f}
-#quick{position:absolute;left:50%;top:150px;transform:translateX(-50%);font-family:Bungee,sans-serif;font-size:17px;color:#ffd23f;text-shadow:0 2px 0 #000,0 0 12px rgba(255,210,63,.6);opacity:0;transition:opacity .25s,transform .25s;pointer-events:none;white-space:nowrap}
+#quick{position:absolute;left:50%;top:150px;transform:translateX(-50%);font-family:'Russo One',sans-serif;font-size:17px;color:#ffd23f;text-shadow:0 2px 0 #000,0 0 12px rgba(255,210,63,.6);opacity:0;transition:opacity .25s,transform .25s;pointer-events:none;white-space:nowrap}
 #quick.show{opacity:1;transform:translateX(-50%) translateY(-6px)}
 #fade{position:absolute;inset:0;background:#000;opacity:1;pointer-events:none;transition:opacity 1.2s ease}
 #fade.off{opacity:0}
@@ -191,13 +206,13 @@ body.cine #lbTop,body.cine #lbBot{transform:none}
 #charbar .arrow{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:rgba(20,8,44,.6);color:#fff;font-size:16px;cursor:pointer;backdrop-filter:blur(8px);transition:transform .15s}
 #charbar .arrow:active{transform:scale(.88)}
 #charName{min-width:230px;text-align:center}
-#charName b{display:block;font-family:Bungee;font-size:19px;letter-spacing:1px;background:linear-gradient(180deg,#fff,#ffd23f);-webkit-background-clip:text;background-clip:text;color:transparent}
+#charName b{display:block;font-family:'Russo One';font-size:19px;letter-spacing:1px;background:linear-gradient(180deg,#fff,#ffd23f);-webkit-background-clip:text;background-clip:text;color:transparent}
 #charName small{font-size:11.5px;color:#ffc7ea;letter-spacing:1px;text-transform:uppercase}
 #charName em{display:block;font-style:normal;font-size:11px;font-weight:800;color:#9fe8ff;margin-top:2px}
 #charName.locked b{filter:grayscale(1) brightness(.7)}
 #story{position:absolute;inset:0;z-index:30;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 36px;background:radial-gradient(ellipse at center,rgba(0,0,0,.2),rgba(0,0,0,.75));cursor:pointer}
 #story.on{display:flex}
-#story h3{font-family:Bungee;font-size:34px;line-height:1.15;color:#fff;text-shadow:0 4px 0 #6a1d5a,0 0 30px rgba(255,120,200,.8);opacity:0;transform:translateY(20px);transition:all .8s cubic-bezier(.2,.9,.3,1)}
+#story h3{font-family:'Russo One';font-size:34px;line-height:1.15;color:#fff;text-shadow:0 4px 0 #6a1d5a,0 0 30px rgba(255,120,200,.8);opacity:0;transform:translateY(20px);transition:all .8s cubic-bezier(.2,.9,.3,1)}
 #story p{margin-top:14px;font-size:16px;color:#ffd23f;letter-spacing:1px;opacity:0;transition:opacity .8s .35s}
 #story.show h3{opacity:1;transform:none}#story.show p{opacity:1}
 #story .skip{position:absolute;bottom:90px;font-size:12px;opacity:.6;letter-spacing:2px}
@@ -213,11 +228,11 @@ body.cine #lbTop,body.cine #lbBot{transform:none}
 .ach.lock{opacity:.35;filter:grayscale(1)}
 .pstats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:10px}
 .pstats div{background:rgba(255,255,255,.06);border-radius:12px;padding:8px 4px;font-size:10.5px;text-transform:uppercase;opacity:.9}
-.pstats b{display:block;font-family:Bungee;font-size:16px;color:#ffd23f}
+.pstats b{display:block;font-family:'Russo One';font-size:16px;color:#ffd23f}
 #tributeBtn{display:none;margin-top:6px;font-size:12px;padding:6px 12px}
 #tributeBtn.on{display:inline-block}
 .tribute{font-size:14px;line-height:1.6;text-align:left;color:#f1e8ff}
-.tribute .years{font-family:Bungee;font-size:22px;text-align:center;color:#ffd23f;margin:4px 0 12px;text-shadow:0 0 18px rgba(255,210,63,.6)}
+.tribute .years{font-family:'Russo One';font-size:22px;text-align:center;color:#ffd23f;margin:4px 0 12px;text-shadow:0 0 18px rgba(255,210,63,.6)}
 .candle{font-size:40px;text-align:center;animation:flick 1.6s ease-in-out infinite}
 @keyframes flick{50%{opacity:.75;transform:scale(.96)}}
 #logo{animation:logoIn 1.4s cubic-bezier(.2,1.3,.4,1) both,float 4s ease-in-out 1.4s infinite}
@@ -244,11 +259,59 @@ body.cine #lbTop,body.cine #lbBot{transform:none}
 #hBoards .ico{width:16px;height:16px;color:#ff5fb0}
 
 #combo{position:absolute;top:84px;left:14px;display:flex;align-items:center;gap:8px;padding:5px 10px 5px 6px;border-radius:14px;background:rgba(10,4,24,.55);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(8px);opacity:0;transform:translateX(-12px);transition:opacity .25s,transform .25s}
-#combo.on{opacity:1;transform:none}#combo b{font:22px Bungee;color:#4ff7ff;text-shadow:0 0 12px rgba(79,247,255,.7)}#combo.hot b{color:#ff5fb0;text-shadow:0 0 14px rgba(255,95,176,.9);animation:bump .5s ease-in-out infinite alternate}
+#combo.on{opacity:1;transform:none}#combo b{font:22px 'Russo One';color:#4ff7ff;text-shadow:0 0 12px rgba(79,247,255,.7)}#combo.hot b{color:#ff5fb0;text-shadow:0 0 14px rgba(255,95,176,.9);animation:bump .5s ease-in-out infinite alternate}
 #combo span{font:800 10px Outfit;letter-spacing:1px;opacity:.85;display:block}#combo .cb{position:absolute;left:8px;right:8px;bottom:3px;height:3px;border-radius:2px;background:rgba(255,255,255,.12);overflow:hidden}#combo .cb i{display:block;height:100%;background:linear-gradient(90deg,#4ff7ff,#ff5fb0)}
 #dailyRunBtn{margin-top:10px;font:800 12.5px Outfit;letter-spacing:1px;padding:8px 16px;display:inline-flex;align-items:center;gap:7px;border-radius:999px}
 #evPill{margin-top:8px;font:600 11px Outfit;color:#ffd9b0;background:rgba(255,138,61,.12);border:1px solid rgba(255,138,61,.35);border-radius:999px;padding:5px 12px;display:inline-flex;align-items:center;gap:6px;max-width:420px}
 #evPill b{color:#ffb070;letter-spacing:.8px}
+
+/* ===================== AAA THEME ===================== */
+:root{--gold1:#fff4d6;--gold2:#f2c76b;--gold3:#b9852c;--ink:#07080d;--glass:rgba(12,14,22,.62);--line:rgba(255,255,255,.14);--acc:#7fd6ff}
+html,body{font-family:'Outfit',system-ui,sans-serif;letter-spacing:.2px}
+#wrap{border-radius:22px;box-shadow:0 0 0 1px rgba(255,255,255,.08),0 40px 140px rgba(0,0,0,.7),0 0 120px rgba(242,199,107,.12)}
+#wrap::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:40;border-radius:22px;
+  background:radial-gradient(120% 90% at 50% 45%,transparent 55%,rgba(0,0,0,.38) 100%);}
+.btn{font-family:'Russo One',sans-serif;letter-spacing:1.5px;text-transform:uppercase;border-radius:14px;color:#14100a;
+  background:linear-gradient(180deg,#fffaf0 0%,#f7dfa5 30%,#e3b25a 62%,#c58f35 100%);
+  box-shadow:0 1px 0 rgba(255,255,255,.9) inset,0 -2px 0 rgba(120,80,20,.45) inset,0 10px 26px rgba(0,0,0,.5),0 0 0 1px rgba(255,236,190,.55),0 0 28px rgba(242,199,107,.28)}
+.btn:active{transform:translateY(2px) scale(.985);box-shadow:0 1px 0 rgba(255,255,255,.8) inset,0 4px 12px rgba(0,0,0,.5),0 0 0 1px rgba(255,236,190,.5)}
+.btn.alt{color:#fff;background:linear-gradient(180deg,#ff9cc9,#e0468f 55%,#9a1f5c);box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 10px 26px rgba(0,0,0,.5),0 0 0 1px rgba(255,170,210,.5),0 0 26px rgba(255,80,160,.3)}
+.btn.cyan{color:#04121e;background:linear-gradient(180deg,#e8fbff,#8fe3ff 45%,#2f9fd8);box-shadow:0 1px 0 rgba(255,255,255,.9) inset,0 10px 26px rgba(0,0,0,.5),0 0 0 1px rgba(190,240,255,.55),0 0 26px rgba(80,200,255,.3)}
+.btn.ghost{font-family:'Outfit';font-weight:600;letter-spacing:1px;background:rgba(255,255,255,.07);border:1px solid var(--line);box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
+.btn.sm{box-shadow:0 1px 0 rgba(255,255,255,.8) inset,0 6px 14px rgba(0,0,0,.45),0 0 0 1px rgba(255,236,190,.45)}
+.btn.icon{width:64px;height:66px;border-radius:16px;background:linear-gradient(180deg,rgba(28,30,44,.78),rgba(10,11,18,.82));border:1px solid rgba(255,255,255,.1);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 8px 22px rgba(0,0,0,.45);transition:transform .15s,box-shadow .2s,border-color .2s}
+.btn.icon:hover{border-color:rgba(242,199,107,.7);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 0 0 1px rgba(242,199,107,.35),0 0 24px rgba(242,199,107,.25)}
+.btn.icon span{font-family:'Outfit';font-weight:700;font-size:9.5px;letter-spacing:1.6px;opacity:.75}
+.btn.icon .ico{filter:drop-shadow(0 2px 6px rgba(0,0,0,.6))}
+.coinpill{font-family:'Russo One';font-weight:400;letter-spacing:.5px;background:linear-gradient(180deg,rgba(24,24,34,.78),rgba(8,8,14,.82));border:1px solid rgba(242,199,107,.55);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 0 18px rgba(242,199,107,.18)}
+#menu{background:linear-gradient(180deg,rgba(4,4,10,.55) 0%,rgba(4,4,10,0) 22%,rgba(4,4,10,0) 48%,rgba(4,4,10,.55) 70%,rgba(4,4,10,.95) 100%)}
+#playBtn{font-size:26px;padding:15px 64px;border-radius:16px;letter-spacing:4px}
+@keyframes pulse{50%{box-shadow:0 1px 0 rgba(255,255,255,.9) inset,0 10px 26px rgba(0,0,0,.5),0 0 0 1px rgba(255,236,190,.7),0 0 44px rgba(242,199,107,.55)}}
+#charName b{font-family:'Russo One';letter-spacing:2px;background:linear-gradient(180deg,#fff,#f2d18a);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 6px rgba(0,0,0,.7))}
+#charName small{letter-spacing:2.5px;text-transform:uppercase;font-weight:600;opacity:.75}
+.arrow{background:rgba(12,14,22,.6)!important;border:1px solid rgba(255,255,255,.14)!important;backdrop-filter:blur(10px)}
+.rank{font-family:'Outfit';font-weight:700;letter-spacing:2px;color:#cfe9ff;text-shadow:0 0 14px rgba(120,200,255,.35)}
+.dim{background:radial-gradient(120% 80% at 50% 40%,rgba(6,6,12,.55),rgba(2,2,6,.85));backdrop-filter:blur(10px) saturate(120%);-webkit-backdrop-filter:blur(10px) saturate(120%)}
+.panel{background:linear-gradient(180deg,rgba(26,28,40,.86),rgba(9,10,16,.92));border:1px solid rgba(255,255,255,.1);border-radius:22px;
+  box-shadow:0 40px 100px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.1),0 0 0 1px rgba(242,199,107,.12);backdrop-filter:blur(18px)}
+.panel::before{content:'';position:absolute;left:24px;right:24px;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(242,199,107,.9),transparent)}
+.panel h2{font-family:'Russo One';letter-spacing:4px;font-size:28px;background:linear-gradient(180deg,#fffaf0,#f2c76b 60%,#b9852c);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 10px rgba(0,0,0,.6))}
+.stat{background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.025));border:1px solid rgba(255,255,255,.08);border-radius:14px}
+.stat b{font-family:'Russo One';color:#f2c76b;letter-spacing:1px}
+.stat span{letter-spacing:2px;font-weight:600}
+.mis{background:linear-gradient(90deg,rgba(255,255,255,.07),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.06)}
+#hScore{font-family:'Russo One';letter-spacing:1px;font-size:30px;text-shadow:0 2px 0 rgba(0,0,0,.5),0 0 22px rgba(255,255,255,.18)}
+#hMult{font-family:'Russo One';font-weight:400;background:linear-gradient(180deg,#fff4d6,#e3b25a);color:#1a1206;box-shadow:0 0 14px rgba(242,199,107,.45)}
+#hDist{font-family:'Outfit';font-weight:600;letter-spacing:2.5px;text-transform:uppercase;opacity:.75}
+#pauseBtn,#hudMute,#hBoards,#nowplaying,.pup{background:linear-gradient(180deg,rgba(24,26,38,.72),rgba(8,9,14,.78));border:1px solid rgba(255,255,255,.12);box-shadow:inset 0 1px 0 rgba(255,255,255,.1)}
+.pup .bar i{background:linear-gradient(90deg,#fff4d6,#f2c76b)}
+#big{font-family:'Russo One';letter-spacing:3px;text-shadow:0 4px 24px rgba(0,0,0,.6),0 0 40px rgba(242,199,107,.5)}
+#big small{font-family:'Outfit';font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#f2c76b;text-shadow:0 2px 10px rgba(0,0,0,.7)}
+#hint{font-family:'Russo One';letter-spacing:2px;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.8),0 0 18px rgba(127,214,255,.6)}
+#toast{background:linear-gradient(180deg,rgba(28,30,44,.92),rgba(10,11,18,.95));border:1px solid rgba(242,199,107,.5);box-shadow:0 20px 50px rgba(0,0,0,.6),0 0 30px rgba(242,199,107,.15)}
+#combo b{font-family:'Russo One'}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-thumb{background:rgba(242,199,107,.4);border-radius:3px}
 </style>
 </head>
 <body>
@@ -390,6 +453,7 @@ import {EffectComposer} from 'three/addons/postprocessing/EffectComposer.js';
 import {RenderPass} from 'three/addons/postprocessing/RenderPass.js';
 import {UnrealBloomPass} from 'three/addons/postprocessing/UnrealBloomPass.js';
 import {OutputPass} from 'three/addons/postprocessing/OutputPass.js';
+import {ShaderPass} from 'three/addons/postprocessing/ShaderPass.js';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
 import {RoundedBoxGeometry} from 'three/addons/geometries/RoundedBoxGeometry.js';
 import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
@@ -677,6 +741,7 @@ R=newWorld();
 const TRAIN_COLS=[['#18b6a8','#0f7f76','#7ff0e4'],['#e8458b','#a62a60','#ffb0d4'],['#f5b52e','#b07a12','#ffe39a'],['#6b6bff','#4141b8','#c8c8ff'],['#1d3a8a','#3d6fd6','#ffffff']];
 const PUPS=['magnet','dbl','jet','shoes','fight'];
 // a lane is free at depth z when no solid obstacle (train, ramp, barrier) overlaps it there
+function spanFree(l,z0,z1){for(const o of R.objs){if(o.k==='coin'||o.k==='pup')continue;const ol=o.lane!=null?o.lane:Math.round((o.x/LANE)+1);if(ol!==l&&!(o.slide&&(o.slide.other===l)))continue;if(z1>=o.z-2&&z0<=o.z+(o.d||.5)+2)return false;}return true;}
 function laneFree(l,z){for(const o of R.objs){if(o.k==='coin'||o.k==='pup')continue;const ol=o.lane!=null?o.lane:Math.round((o.x/LANE)+1);if(ol!==l&&!(o.slide&&o.slide.other===l))continue;if(z>=o.z-2&&z<=o.z+(o.d||.5)+2)return false;}return true;}
 function spawnRow(z){
   const lanes=[0,1,2].sort(()=>Math.random()-.5);
@@ -685,9 +750,10 @@ function spawnRow(z){
   let trainUsed=false;
   for(let i=0;i<nBlock;i++){
     const ln=lanes[i],x=laneX(ln),r=Math.random();
-    if(!trainUsed&&r<.42){
+    if(!laneFree(ln,z))continue;
+    if(!trainUsed&&r<.42&&spanFree(ln,z,z+20)){
       trainUsed=true;
-      const moving=R.dist>150&&Math.random()<.34+hard*.3;
+      const moving=R.dist>150&&Math.random()<.34+hard*.3&&spanFree(ln,-2,z+40);
       const d=moving?rnd(9,13):rnd(9,15);
       if(moving){const th=Math.random();const theme=th<.3?'fame':th<.6?'cm':null;R.objs.push({k:'train',lane:ln,x,z:z+16,d,v:rnd(8,12),col:theme==='fame'?['#d4af37','#111111','#ffffff']:theme==='cm'?['#c8102e','#111111','#ffd23f']:['#e8323c','#9a1f27','#ffb3b8'],moving:true,horn:false,theme});}
       else{
@@ -966,6 +1032,7 @@ scene.fog=new THREE.Fog(0xffb066,40,175);
 scene.environment=pmrem.fromScene(new RoomEnvironment(),.04).texture;
 setTimeout(()=>tame(scene),0);
 let composer=null,bloom=null,qScale=1;
+let GRADE=null;
 function setupCanvas(){
   const k=Math.min(innerWidth/W,innerHeight/H);
   const d=Math.max(.6,(S.hq?Math.min(2,(devicePixelRatio||1)*k):Math.min(1,(devicePixelRatio||1)*k*.8))*qScale);
@@ -973,8 +1040,17 @@ function setupCanvas(){
   renderer.shadowMap.enabled=S.hq;
   const od=Math.max(1,Math.min(2,d));ov.width=Math.round(W*od);ov.height=Math.round(H*od);ctx.setTransform(ov.width/W,0,0,ov.height/H,0,0);
   if(composer&&composer.dispose)composer.dispose();
-  if(S.hq){composer=new EffectComposer(renderer);composer.setPixelRatio(d);composer.setSize(W,H);composer.addPass(new RenderPass(scene,camera));
-    bloom=new UnrealBloomPass(new THREE.Vector2(W,H),.55,.4,2.4);composer.addPass(bloom);composer.addPass(new OutputPass());}
+  if(S.hq){const rt=new THREE.WebGLRenderTarget(Math.round(W*d),Math.round(H*d),{type:THREE.HalfFloatType,samples:4});composer=new EffectComposer(renderer,rt);composer.setPixelRatio(d);composer.setSize(W,H);composer.addPass(new RenderPass(scene,camera));
+    bloom=new UnrealBloomPass(new THREE.Vector2(W,H),.55,.4,2.4);composer.addPass(bloom);composer.addPass(new OutputPass());
+    GRADE=new ShaderPass({uniforms:{tDiffuse:{value:null},time:{value:0},res:{value:new THREE.Vector2(W,H)},speed:{value:0}},
+      vertexShader:'varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
+      fragmentShader:`uniform sampler2D tDiffuse;uniform float time,speed;uniform vec2 res;varying vec2 vUv;
+      float h(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}
+      void main(){vec2 c=vUv-.5;float r2=dot(c,c);vec2 off=c*r2*(.012+speed*.01);
+        vec3 col=vec3(texture2D(tDiffuse,vUv-off).r,texture2D(tDiffuse,vUv).g,texture2D(tDiffuse,vUv+off).b);
+        float l=dot(col,vec3(.299,.587,.114));col=mix(vec3(l),col,1.1);col=col*col*(3.-2.*col)*.25+col*.75;
+        col*=1.-smoothstep(.18,.62,r2*1.15)*.42;col+=(h(vUv*res+fract(time)*61.)-.5)*.028;
+        gl_FragColor=vec4(col,1.);}`});composer.addPass(GRADE);}
   else{composer=null;bloom=null;}
   scene.traverse(o=>{if(o.material){(Array.isArray(o.material)?o.material:[o.material]).forEach(m=>m.needsUpdate=true);}});
 }
@@ -1186,34 +1262,81 @@ const waterMat=new THREE.MeshStandardMaterial({map:waterTex,color:'#7fe0f0',roug
 let tunAmt=0;
 
 // ---------- sky ----------
-const skyU={top:{value:new THREE.Color()},mid:{value:new THREE.Color()},hor:{value:new THREE.Color()},low:{value:new THREE.Color()}};
-const sky=new THREE.Mesh(new THREE.SphereGeometry(450,32,16),new THREE.ShaderMaterial({uniforms:skyU,side:THREE.BackSide,depthWrite:false,fog:false,toneMapped:false,
+const skyU={top:{value:new THREE.Color()},mid:{value:new THREE.Color()},hor:{value:new THREE.Color()},low:{value:new THREE.Color()},sunDir:{value:new THREE.Vector3(0,.2,-1)},sunCol:{value:new THREE.Color('#ffb066')},time:{value:0},dark:{value:0}};
+const sky=new THREE.Mesh(new THREE.SphereGeometry(450,64,32),new THREE.ShaderMaterial({uniforms:skyU,side:THREE.BackSide,depthWrite:false,fog:false,toneMapped:false,
   vertexShader:'varying vec3 vP;void main(){vP=normalize(position);gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
-  fragmentShader:'uniform vec3 top,mid,hor,low;varying vec3 vP;void main(){float h=vP.y;vec3 c;if(h>0.22)c=mix(mid,top,smoothstep(.22,.8,h));else if(h>0.)c=mix(hor,mid,smoothstep(0.,.22,h));else c=mix(hor,low,smoothstep(0.,-.15,h));gl_FragColor=vec4(c,1.);\n#include <colorspace_fragment>\n}'}));
+  fragmentShader:`uniform vec3 top,mid,hor,low,sunDir,sunCol;uniform float time,dark;varying vec3 vP;
+float h21(vec2 p){p=fract(p*vec2(123.34,456.21));p+=dot(p,p+45.32);return fract(p.x*p.y);}
+float n2(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h21(i),h21(i+vec2(1,0)),f.x),mix(h21(i+vec2(0,1)),h21(i+vec2(1,1)),f.x),f.y);}
+float fbm(vec2 p){float v=0.,a=.5;mat2 m=mat2(1.6,1.2,-1.2,1.6);for(int i=0;i<6;i++){v+=a*n2(p);p=m*p;a*=.5;}return v;}
+void main(){vec3 d=normalize(vP);float h=d.y;vec3 c;
+ if(h>0.22)c=mix(mid,top,smoothstep(.22,.8,h));else if(h>0.)c=mix(hor,mid,smoothstep(0.,.22,h));else c=mix(hor,low,smoothstep(0.,-.15,h));
+ vec3 sd=normalize(sunDir);float mu=max(dot(d,sd),0.);
+ c+=sunCol*(pow(mu,8.)*.35+pow(mu,64.)*.6)*(1.-dark*.6);
+ c+=sunCol*.25*exp(-abs(h)*14.)*pow(mu,2.)*(1.-dark*.5);
+ if(h>0.){vec2 uv=d.xz/(h+.12);
+  // stars + milky way at night
+  vec2 sg=d.xz/(h+.6)*90.;float st=step(.9965,h21(floor(sg)));float tw=.6+.4*sin(time*3.+h21(floor(sg)+3.)*40.);
+  float mw=fbm(vec2(d.x*3.+d.z*1.5,d.y*6.)*2.)*exp(-pow((d.x*.6-d.z*.8)*2.4,2.));
+  c+=dark*(vec3(st*tw)+vec3(.45,.4,.7)*mw*.35)*smoothstep(.05,.3,h);
+  // two cloud decks: billowy low deck + wispy cirrus
+  float t=time*.006;vec2 q=uv*.9+vec2(t,t*.4);float w=fbm(q+fbm(q*1.7+vec2(3.1,1.7)));
+  float cl=smoothstep(.48,.85,w)*smoothstep(.0,.08,h)*(1.-smoothstep(.55,.95,h));
+  float ci=smoothstep(.55,.9,fbm(uv*vec2(.6,2.4)+vec2(t*1.6,0.)))*.55*smoothstep(.05,.25,h);
+  float light=.55+.45*fbm(q*2.+sd.xz*.3);
+  vec3 lit=mix(hor*1.15,sunCol*1.4,.45+.4*pow(mu,3.))*light;vec3 shade=mix(mid*.55,top*.7,.5);
+  vec3 cc=mix(shade,lit,light);cc=mix(cc,cc*.35+vec3(.06,.05,.12),dark);
+  float rim=pow(mu,6.)*cl*(1.-cl)*2.5;
+  c=mix(c,cc,cl*.92);c=mix(c,mix(hor,vec3(1.),.35)*(1.-dark*.7),ci*.5);c+=sunCol*rim*(1.-dark);}
+ // horizon haze band
+ c=mix(c,hor*1.05,exp(-abs(h)*22.)*.55);
+ gl_FragColor=vec4(c,1.);
+#include <colorspace_fragment>
+}`}));
 sky.renderOrder=-10;scene.add(sky);
 const sunSpr=new THREE.Sprite(new THREE.SpriteMaterial({map:glowTex,color:'#fff27a',fog:false,depthWrite:false,transparent:true,blending:THREE.AdditiveBlending}));sunSpr.scale.setScalar(260);scene.add(sunSpr);
 const sunDisc=new THREE.Mesh(new THREE.CircleGeometry(30,48),new THREE.MeshBasicMaterial({color:'#ffd56a',fog:false,toneMapped:false}));scene.add(sunDisc);
 const starGeo=new THREE.BufferGeometry();{const a=[];for(let i=0;i<700;i++){const th=Math.random()*Math.PI*2,ph=Math.random()*Math.PI*.42;a.push(Math.cos(th)*Math.sin(ph)*400,Math.cos(ph)*400,Math.sin(th)*Math.sin(ph)*400);}starGeo.setAttribute('position',new THREE.Float32BufferAttribute(a,3));}
 const stars=new THREE.Points(starGeo,new THREE.PointsMaterial({color:'#ffffff',size:1.8,sizeAttenuation:false,transparent:true,opacity:.5,fog:false,depthWrite:false}));scene.add(stars);
 // distant skyline ring + window lights
-const skyFacTex=canvasTex(256,512,(g,w,h)=>{g.fillStyle='#800000';g.fillRect(0,0,w,h);const cw=w/8,rh=h/24;
-  for(let r=0;r<24;r++){g.fillStyle='rgba(0,0,0,.18)';g.fillRect(0,r*rh,w,2);for(let c=0;c<8;c++){const lit=Math.random();g.fillStyle=lit<.42?`rgb(${150+Math.random()*60|0},255,0)`:'rgb(40,0,0)';g.fillRect(c*cw+3,r*rh+4,cw-6,rh-8);}}
-  for(let c=0;c<=8;c++){g.fillStyle='rgba(255,0,0,.25)';g.fillRect(c*cw,0,1.5,h);}});
+const skyFacTex=canvasTex(512,1024,(g,w,h)=>{g.fillStyle='#800000';g.fillRect(0,0,w,h);const cols=16,rows=48,cw=w/cols,rh=h/rows;
+  for(let c=0;c<cols;c++){if(c%4===0){g.fillStyle='rgba(0,0,255,1)';g.globalCompositeOperation='lighter';g.fillRect(c*cw,0,cw*2,h);g.globalCompositeOperation='source-over';}}
+  for(let r=0;r<rows;r++){const floorLit=Math.random()<.18,floorDark=Math.random()<.2;g.fillStyle='rgba(0,0,0,.25)';g.fillRect(0,r*rh,w,2);
+    for(let c=0;c<cols;c++){const lit=floorLit?Math.random()<.92:floorDark?Math.random()<.05:Math.random()<.32;const tone=Math.random();
+      g.fillStyle=lit?`rgb(${120+tone*110|0},${200+Math.random()*55|0},0)`:`rgb(${30+Math.random()*30|0},0,0)`;g.fillRect(c*cw+3,r*rh+4,cw-6,rh-7);
+      if(lit&&Math.random()<.3){g.fillStyle='rgba(0,0,0,.6)';g.fillRect(c*cw+3,r*rh+4,(cw-6)*Math.random(),rh-7);}}}
+  for(let c=0;c<=cols;c++){g.fillStyle='rgba(255,0,0,.18)';g.fillRect(c*cw,0,1,h);}});
 skyFacTex.wrapS=skyFacTex.wrapT=THREE.RepeatWrapping;skyFacTex.colorSpace=THREE.NoColorSpace;
 // distant skyline: merged, textured towers with setbacks and spires
-const skyU2={map:{value:null},wall:{value:new THREE.Color('#2c1048')},win:{value:.6},night:{value:0}};
-const skyMat=new THREE.ShaderMaterial({uniforms:skyU2,fog:false,vertexShader:'varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
-  fragmentShader:'uniform sampler2D map;uniform vec3 wall;uniform float win;uniform float night;varying vec2 vUv;void main(){vec4 t=texture2D(map,vUv);vec3 c=wall*(.55+.9*t.r);float h=fract(t.r*9.);vec3 wc=mix(vec3(1.,.78,.45),vec3(.75,.88,1.),step(.6,h))*t.g*win*(.6+.4*night);gl_FragColor=vec4(c+wc,1.);\n#include <tonemapping_fragment>\n#include <colorspace_fragment>\n}'});
+const skyU2={map:{value:null},wall:{value:new THREE.Color('#2c1048')},win:{value:.6},night:{value:0},haze:{value:new THREE.Color('#ffb066')},hi:{value:new THREE.Color('#5a2475')},time:{value:0}};
+const skyMat=new THREE.ShaderMaterial({uniforms:skyU2,fog:false,vertexShader:'varying vec2 vUv;varying vec3 vW;varying vec3 vN;void main(){vUv=uv;vec4 w=modelMatrix*vec4(position,1.);vW=w.xyz;vN=normalize(mat3(modelMatrix)*normal);gl_Position=projectionMatrix*viewMatrix*w;}',
+  fragmentShader:`uniform sampler2D map;uniform vec3 wall,haze,hi;uniform float win,night,time;varying vec2 vUv;varying vec3 vW;varying vec3 vN;
+  void main(){vec4 t=texture2D(map,vUv);float glass=t.b;vec3 c=wall*(.5+.9*t.r);
+   float up=clamp(vN.y,0.,1.);c=mix(c,mix(haze,hi,.5)*.55,glass*.35*(1.-night*.6));c=mix(c,wall*1.4,up*.5);
+   float flick=step(.985,fract(sin(dot(floor(vUv*vec2(16.,48.)),vec2(12.9,78.2)))*43758.5+time*.02));
+   vec3 wc=mix(vec3(1.,.74,.42),vec3(.72,.86,1.),step(.62,fract(t.r*9.)))*t.g*win*(.55+.45*night)*(1.-.6*flick);
+   c+=wc;float dist=length(vW.xz);float hz=clamp((dist-200.)/200.,0.,1.)*.32+.22*(1.-smoothstep(0.,45.,vW.y));c=mix(c,mix(haze,wall,.35)*(.75+.25*(1.-night)),clamp(hz,0.,.55)*(1.-night*.5));
+   gl_FragColor=vec4(c,1.);
+#include <tonemapping_fragment>
+#include <colorspace_fragment>
+}`});
 skyMat.color=skyU2.wall.value;
-const SKYN=170;const skyWinPts=[];let skyline;
+const SKYN=170;const skyWinPts=[];let skyline;const avPts=[];
 {const parts=[];const m=new THREE.Matrix4(),q=new THREE.Quaternion(),up=new THREE.Vector3(0,1,0);
-  const addBox=(w,h,d,x,y,z,ang)=>{const b=new THREE.BoxGeometry(w,h,d);const uv=b.attributes.uv;for(let i=0;i<uv.count;i++){const face=Math.floor(i/4);const fw=face<2?d:w;uv.setXY(i,uv.getX(i)*fw/12,uv.getY(i)*h/60);}
+  const addBox=(w,h,d,x,y,z,ang)=>{const b=new THREE.BoxGeometry(w,h,d);const uv=b.attributes.uv;const off=Math.random();for(let i=0;i<uv.count;i++){const face=Math.floor(i/4);const fw=face<2?d:w;uv.setXY(i,uv.getX(i)*fw/14+off,uv.getY(i)*h/72);}
     q.setFromAxisAngle(up,ang);m.compose(new THREE.Vector3(x,y,z),q,new THREE.Vector3(1,1,1));b.applyMatrix4(m);parts.push(b);};
-  for(let i=0;i<SKYN;i++){const ang=(i/SKYN)*Math.PI*2+Math.random()*.02;const r=210+Math.random()*30;const w=6+Math.random()*12,h=10+Math.random()*45,d=8;
-    const x=Math.sin(ang)*r,z=Math.cos(ang)*r;addBox(w,h,d,x,h/2-2,z,ang);
-    if(h>28&&Math.random()<.6){const h2=h*(.18+Math.random()*.25);addBox(w*.62,h2,d*.7,x,h-2+h2/2,z,ang);if(Math.random()<.6)addBox(.4,h2*.9+4,.4,x,h-2+h2+(h2*.9+4)/2,z,ang);}
-    else if(Math.random()<.3)addBox(w*.3,2.5,d*.5,x,h-2+1.25,z,ang);}
+  const ring=(N,r0,r1,hmin,hmax,wmin,wmax)=>{for(let i=0;i<N;i++){const ang=(i/N)*Math.PI*2+Math.random()*.02;const r=r0+Math.random()*(r1-r0);const w=wmin+Math.random()*(wmax-wmin),h=hmin+Math.random()*(hmax-hmin),d=w*.8;
+    const x=Math.sin(ang)*r,z=Math.cos(ang)*r;addBox(w,h,d,x,h/2-2,z,ang);let top=h-2;
+    if(h>hmin+(hmax-hmin)*.45&&Math.random()<.7){const h2=h*(.12+Math.random()*.22);addBox(w*.7,h2,d*.7,x,top+h2/2,z,ang);top+=h2;if(Math.random()<.5){const h3=h2*.6;addBox(w*.42,h3,d*.42,x,top+h3/2,z,ang);top+=h3;}
+      if(Math.random()<.65){const sp=4+Math.random()*10;addBox(.35,sp,.35,x,top+sp/2,z,ang);top+=sp;}avPts.push(x,top+.4,z);}
+    else if(Math.random()<.35){addBox(w*.32,2.5,d*.45,x,top+1.25,z,ang);}}};
+  ring(SKYN,205,245,10,48,6,16);ring(120,280,330,25,85,8,20);
   skyline=new THREE.Mesh(mergeGeometries(parts),skyMat);parts.forEach(p=>p.dispose());skyline.frustumCulled=false;}
+const avGeo=new THREE.BufferGeometry();avGeo.setAttribute('position',new THREE.Float32BufferAttribute(avPts,3));
+const avMat=new THREE.ShaderMaterial({uniforms:{time:skyU2.time},transparent:true,depthWrite:false,fog:false,blending:THREE.AdditiveBlending,
+  vertexShader:'uniform float time;varying float vB;void main(){vB=step(.55,fract(time*.6+position.x*.013));gl_PointSize=7.;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
+  fragmentShader:'varying float vB;void main(){float d=length(gl_PointCoord-.5);float a=smoothstep(.5,0.,d);gl_FragColor=vec4(1.,.15,.12,a*(.25+.75*vB));}'});
+const avLights=new THREE.Points(avGeo,avMat);avLights.frustumCulled=false;scene.add(avLights);
 skyU2.map.value=skyFacTex;
 scene.add(skyline);
 const swg=new THREE.BufferGeometry();swg.setAttribute('position',new THREE.Float32BufferAttribute(skyWinPts,3));
@@ -1246,7 +1369,7 @@ function detailPal(){const key=LV?(BIOME_G[LV.biome]||'gravel'):'coast';
   setGroundSet(key);gndMat.color.lerp(_c.set('#ffffff'),.62);roadMat.color.lerp(_c.set('#ffffff'),.45);sideMat.color.lerp(_c.set('#ffffff'),.55);
   const off=R?R.dist:0;gndMat.map.offset.y=off/GT;gndMat.normalMap.offset.y=off/GT;roadMat.map.offset.y=off/4;roadMat.normalMap.offset.y=off/4;
   for(const t of [sideMat.map,sideMat.normalMap,sideMat.roughnessMap])t.offset.y=off/1;
-  skyU2.win.value=.25+pal.win*1.1;skyU2.night.value=pal.dark;if(_bulbM['#ffb020'])_bulbM['#ffb020'].emissiveIntensity=2.5+2*Math.max(0,Math.sin(T*6));}
+  skyU2.win.value=.25+pal.win*1.1;skyU2.night.value=pal.dark;skyU2.time.value=T;skyU2.haze.value.copy(skyU.hor.value);skyU2.hi.value.copy(skyU.mid.value);skyU.time.value=T;skyU.dark.value=pal.dark;skyU.sunCol.value.setStyle(pal.sun[1]);skyU.sunDir.value.copy(sunSpr.position).normalize();if(_bulbM['#ffb020'])_bulbM['#ffb020'].emissiveIntensity=2.5+2*Math.max(0,Math.sin(T*6));}
 // ---------- ground clutter: stones, pebbles, weeds that stream past ----------
 const stoneGeo=(()=>{const g=new THREE.IcosahedronGeometry(1,2);const p=g.attributes.position;for(let i=0;i<p.count;i++){const v=new THREE.Vector3().fromBufferAttribute(p,i);const n=1+.25*Math.sin(v.x*5.1+v.z*2.3)+.15*Math.cos(v.y*7+v.x*3);v.multiplyScalar(n);v.y*=.55;p.setXYZ(i,v.x,v.y,v.z);}g.computeVertexNormals();return g;})();
 const pebMat=new THREE.MeshStandardMaterial({map:phTex('rocky_trail_d',true,.6,.6),normalMap:phTex('rocky_trail_n',false,.6,.6),roughness:.9,color:'#d8d0c8'});
@@ -2405,7 +2528,7 @@ function render(dt){
   beatPulse=Math.max(0,beatPulse-dt*5);
   updatePaps(dt);
   updateTies();syncWorld();animChar(dt);updateCamera(dt);updateEnv();
-  if(composer){bloom.strength=.55+pal.dark*.35+flash*.6+beatPulse*.25+tunAmt*.2;bloom.threshold=2.4-pal.dark*.6;bloom.radius=.4;composer.render();}else renderer.render(scene,camera);
+  if(composer){bloom.strength=.55+pal.dark*.35+flash*.6+beatPulse*.25+tunAmt*.2;bloom.threshold=2.4-pal.dark*.6;bloom.radius=.4;if(GRADE){GRADE.uniforms.time.value=T;GRADE.uniforms.speed.value=mode==='play'&&R?Math.max(0,(R.speed-14)/20)+(R.jet>0?.4:0):0;}composer.render();}else renderer.render(scene,camera);
   ctx.clearRect(0,0,W,H);
   drawWeather();drawSpeedLines();drawParts(dt);
   if(flash>0){ctx.fillStyle=`rgba(255,255,255,${flash*.35})`;ctx.fillRect(0,0,W,H);}
