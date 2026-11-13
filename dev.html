@@ -1393,7 +1393,15 @@ const frondGeo2=(()=>{const g=new THREE.PlaneGeometry(2.1,.75,14,2);const p=g.at
 const SHOPS=['FAME RECORDS','239 BEATS','CAPE CUTS','GULF VINYL','PALM STUDIOS','ICE COLD WINGS','NEON NIGHTS','CORAL KICKS','BASS DEPOT','MIXTAPE MART','24/7 BODEGA','SUNSET TATTOO'];
 const _shopC={};function shopTex(name,col){const k=name+col;return _shopC[k]||(_shopC[k]=canvasTex(512,96,(g,w,h)=>{g.fillStyle='#0b0614';g.fillRect(0,0,w,h);g.textAlign='center';g.textBaseline='middle';let fs=58;g.font=`${fs}px Bungee, Arial Black`;while(g.measureText(name).width>w-40&&fs>20){fs-=4;g.font=`${fs}px Bungee, Arial Black`;}
   g.shadowColor=col;g.shadowBlur=18;g.strokeStyle=col;g.lineWidth=3;g.strokeText(name,w/2,h*.55);g.fillStyle='#fff';g.fillText(name,w/2,h*.55);}));}
-const storeGlass=new THREE.MeshStandardMaterial({color:'#1a1426',roughness:.08,metalness:.9,emissive:'#ffb870',emissiveIntensity:.35});
+const shopWinTex=canvasTex(768,256,(g,w,h)=>{const bg=g.createLinearGradient(0,0,0,h);bg.addColorStop(0,'#3a2a20');bg.addColorStop(.5,'#6a4a30');bg.addColorStop(1,'#2a1c14');g.fillStyle=bg;g.fillRect(0,0,w,h);
+  const lit=g.createRadialGradient(w*.5,h*.2,10,w*.5,h*.2,w*.6);lit.addColorStop(0,'rgba(255,220,160,.55)');lit.addColorStop(1,'rgba(255,200,140,0)');g.fillStyle=lit;g.fillRect(0,0,w,h);
+  for(const y of [h*.3,h*.55,h*.8]){g.fillStyle='#2a1a10';g.fillRect(0,y,w,6);for(let x=6;x<w-10;x+=10+Math.random()*14){const ph=12+Math.random()*30;g.fillStyle=`hsl(${Math.random()*360},${40+Math.random()*40}%,${35+Math.random()*30}%)`;g.fillRect(x,y-ph,6+Math.random()*8,ph);}}
+  for(let i=0;i<4;i++){g.fillStyle='rgba(255,240,200,.9)';g.fillRect(w*(.15+i*.23),6,40,4);}
+  g.fillStyle='rgba(20,16,24,.85)';g.fillRect(w*.42,h*.08,w*.16,h*.92);const dg=g.createLinearGradient(0,h*.1,0,h);dg.addColorStop(0,'rgba(120,150,190,.35)');dg.addColorStop(1,'rgba(40,50,70,.35)');g.fillStyle=dg;g.fillRect(w*.43,h*.12,w*.14,h*.85);g.fillStyle='#c9b08a';g.fillRect(w*.545,h*.55,4,22);
+  g.fillStyle='#14121a';for(const x of [0,w*.42,w*.58,w-8])g.fillRect(x,0,8,h);g.fillRect(0,0,w,8);g.fillRect(0,h-10,w,10);g.fillRect(0,h*.06,w,4);
+  g.fillStyle='rgba(255,255,255,.14)';for(const x0 of [w*.05,w*.65]){g.beginPath();g.moveTo(x0,8);g.lineTo(x0+60,8);g.lineTo(x0+10,h-10);g.lineTo(x0-50,h-10);g.closePath();g.fill();}
+  g.font='700 22px Outfit, Arial';g.fillStyle='rgba(255,90,140,.9)';g.fillText('OPEN',w*.2,h*.2);});
+const storeGlass=new THREE.MeshStandardMaterial({map:shopWinTex,emissiveMap:shopWinTex,emissive:'#ffffff',emissiveIntensity:.55,roughness:.12,metalness:.2,envMapIntensity:1.2});
 const acMat=new THREE.MeshStandardMaterial({color:'#b9bcc4',roughness:.55,metalness:.6});
 const tankMat=new THREE.MeshStandardMaterial({color:'#7a5a3a',roughness:.9});
 function bldDetail(g,o){const sd=Math.sign(o.x)||1,fx=-sd*(o.w/2+.012),ry=sd>0?-Math.PI/2:Math.PI/2;const rnd=(a,b)=>a+Math.random()*(b-a);
@@ -3039,14 +3047,16 @@ function buildHeli(){const g=new THREE.Group();const body=mat('#1c1e26',{r:.35,m
   rotor.add(new THREE.Mesh(new THREE.CylinderGeometry(3.6,3.6,.01,32),new THREE.MeshBasicMaterial({color:'#999',transparent:true,opacity:.12,depthWrite:false})));g.add(rotor);
   const beacon=new THREE.Mesh(G.sph,new THREE.MeshStandardMaterial({color:'#ff2030',emissive:'#ff2030',emissiveIntensity:6}));beacon.scale.setScalar(.07);beacon.position.set(0,-.7,.2);g.add(beacon);
   const lamp=new THREE.Mesh(new THREE.CylinderGeometry(.14,.18,.22,14),mat('#ddd',{m:.9,r:.2}));lamp.position.set(0,-.72,.8);g.add(lamp);
-  const sl=new THREE.SpotLight('#eaf2ff',60,30,.32,.55,1.2);sl.position.set(0,-.8,.8);g.add(sl);const tgt=new THREE.Object3D();scene.add(tgt);sl.target=tgt;
+  const sl=new THREE.SpotLight('#eaf2ff',0,30,.32,.55,1.2);sl.position.set(0,-50,0);scene.add(sl);const tgt=new THREE.Object3D();scene.add(tgt);sl.target=tgt;
   const cone=new THREE.Mesh(new THREE.ConeGeometry(1,1,28,1,true),new THREE.MeshBasicMaterial({color:'#dfe9ff',transparent:true,opacity:.11,blending:THREE.AdditiveBlending,depthWrite:false,side:THREE.DoubleSide}));scene.add(cone);
   const spot=new THREE.Mesh(new THREE.CircleGeometry(1,32),new THREE.MeshBasicMaterial({map:glowTex,color:'#eaf2ff',transparent:true,opacity:.6,blending:THREE.AdditiveBlending,depthWrite:false}));spot.rotation.x=-Math.PI/2;scene.add(spot);
   g.visible=cone.visible=spot.visible=false;scene.add(g);tame(g);return {g,rotor,trot,beacon,sl,tgt,cone,spot,snd:0,x:0};}
-function heliStart(){if(!HELI)HELI=buildHeli();R.heli=18;HELI.g.visible=HELI.cone.visible=HELI.spot.visible=true;HELI.x=R.x;HELI.y=14;bigText('<span style="font-size:36px">CHOPPER CHASE!</span>','Coins count double in the spotlight');sfxHorn();}
-function heliStop(){if(HELI){HELI.g.visible=HELI.cone.visible=HELI.spot.visible=false;}if(R)R.heli=0;}
+function heliStart(){if(!HELI)HELI=buildHeli();R.heli=18;HELI.g.visible=HELI.cone.visible=HELI.spot.visible=true;HELI.sl.intensity=60;HELI.x=R.x;HELI.y=14;bigText('<span style="font-size:36px">CHOPPER CHASE!</span>','Coins count double in the spotlight');sfxHorn();}
+function heliStop(){if(HELI){HELI.g.visible=HELI.cone.visible=HELI.spot.visible=false;HELI.sl.intensity=0;}if(R)R.heli=0;}
+// build the chopper up-front and pre-compile its shaders so it never hitches when it arrives
+setTimeout(()=>{try{if(!HELI)HELI=buildHeli();HELI.g.visible=HELI.cone.visible=HELI.spot.visible=true;HELI.g.position.set(0,-60,0);renderer.compile(scene,camera);HELI.g.visible=HELI.cone.visible=HELI.spot.visible=false;}catch(e){console.warn('heli pre',e);}},2500);
 function heliTick(dt){if(!HELI||!HELI.g.visible)return;const H=HELI;H.x=lerp(H.x,R.x,Math.min(1,dt*1.5));const leaving=R.heli<2;H.y=lerp(H.y,leaving?16:6.2,Math.min(1,dt*(leaving?.8:1.2)));
-  H.g.position.set(H.x+Math.sin(T*.7)*.6,H.y+Math.sin(T*1.3)*.15,-(PZ+9));H.g.rotation.set(.18,Math.PI,Math.sin(T*.9)*.06);H.rotor.rotation.y+=dt*38;H.trot.rotation.x+=dt*50;H.beacon.visible=Math.floor(T*2)%2===0;
+  H.g.position.set(H.x+Math.sin(T*.7)*.6,H.y+Math.sin(T*1.3)*.15,-(PZ+9));H.sl.position.set(H.g.position.x,H.g.position.y-.8,H.g.position.z-.8);H.g.rotation.set(.18,Math.PI,Math.sin(T*.9)*.06);H.rotor.rotation.y+=dt*38;H.trot.rotation.x+=dt*50;H.beacon.visible=Math.floor(T*2)%2===0;
   const px=R.x,py=R.y,pz=-PZ;H.tgt.position.set(px,py,pz);H.tgt.updateMatrixWorld();
   const from=new THREE.Vector3(H.g.position.x,H.g.position.y-.8,H.g.position.z+.5),to=new THREE.Vector3(px,py,pz);const d=to.clone().sub(from),L=d.length();
   H.cone.position.copy(from).addScaledVector(d,.5);H.cone.quaternion.setFromUnitVectors(new THREE.Vector3(0,-1,0),d.clone().normalize());H.cone.scale.set(1.3,L,1.3);
