@@ -434,6 +434,7 @@ const CHARS=[
  {id:'biggie',title:"King of New York",legend:true,tribute2:true,name:'THE NOTORIOUS B.I.G.',sub:'Brooklyn, New York · 1972 – 1997',perk:'King of NY · +20% score',p:{score:1.2},unlockLv:'us-NY',cost:8000,look:{hoodie:'#b8322a',shade:'#7a1f1a',text:'#ffd23f',label:'BIGGIE',skin:'#4a2c1e',hat:false,kangol:true,cap:'#1a1a1a',hair:'#111',pants:'#1c1c22',sx:1.04,sy:1,chainBig:true}},
  {id:'pac',title:"Ride-or-Die Poet",legend:true,tribute2:true,name:'2PAC',sub:'East Harlem to the West Coast · 1971 – 1996',perk:'Ride or die · jumps 15% higher',p:{jump:1.15},unlockLv:'us-MD',cost:8000,look:{hoodie:'#f2f2f2',shade:'#cfcfcf',text:'#1a1a1a',label:'2PAC',skin:'#6b4430',hat:false,bandana:'#1f4fa0',hair:'#111',pants:'#2f4a7a',noShades:true}},
  {id:'em',title:"Rap God",legend:true,name:'EMINEM',sub:'Detroit, Michigan · battle-rap legend',perk:'Lose yourself · on-beat bonus x2',p:{beat:2},unlockLv:'us-MI',cost:7000,look:{hoodie:'#9a9aa2',shade:'#6e6e76',text:'#111111',label:'EMINEM',skin:'#f1c6a0',hat:false,hair:'#f0dc9a',pants:'#3a4f75',noShades:true,noChain:true}},
+ {id:'ceo',title:"Knockout Boss",artist:true,name:'YOUNG CEO',sub:'Boxer & rapper · Fame Records',perk:'Fight Club Energy lasts +3s',p:{fight:3},look:{hoodie:'#5a5a5e',shade:'#3e3e42',text:'#ffffff',label:'CEO',skin:'#b97a52',hat:false,bald:true,hair:'#141010',pants:'#5d7290',noShades:true,noChain:true}},
  {id:'palm',title:"Bounce Prince",artist:true,name:'LIL PALMETTO',sub:'Florida bounce · Fame Records',perk:'Magnet lasts +4s',p:{magnet:4},look:{hoodie:'#3ddc97',shade:'#22a46c',text:'#3ddc97',label:'PALM',skin:'#8d5a3b',hat:false,chainBig:false,pants:'#1c2a40',hair:'#120a06'}},
  {id:'nova',title:"R&B Royalty",artist:true,name:'NOVA REIGN',sub:'R&B singer · Fame Records',perk:'2X Coins lasts +4s',p:{dbl:4},look:{hoodie:'#ff7ac3',shade:'#c94b92',text:'#ffffff',label:'NOVA',skin:'#f1c6a0',hat:false,bun:true,hair:'#5a2a12',pants:'#2b1838'}},
  {id:'bricks',title:"Street Poet",artist:true,name:'BRICKS MERCADO',sub:'Street rap · Fame Records',perk:'Starts every run on a board',p:{board:12},look:{hoodie:'#ff9f43',shade:'#c2701e',text:'#1a0b2e',label:'BRIX',skin:'#c68a5e',hat:true,cap:'#1a0b2e',pants:'#2a2a2a',hair:'#111'}},
@@ -448,7 +449,7 @@ const ICE_LOOK={skin:'#d9a57c',skinShade:'#b9845d',hair:'#0d0d10',shoes:'#ffffff
   hoodie:'#b3121f',hoodieShade:'#7d0c15',hoodieText:'#ffd23f',cap:null,pants:'#111114',pantsShade:'#07070a',glow:'#ffd23f',label:'ICE',pendant:'ICE',stripe:'#ffd23f',hat:false,flat:true};
 let LOOK={},DECK=DECKS[0];
 function applyLook(){const cc=CHARS.find(x=>x.id===S.char);
-  if(cc&&cc.look){const k=cc.look;LOOK=Object.assign({},BASE_LOOK,{hoodie:k.hoodie,hoodieShade:k.shade,hoodieText:k.text,cap:k.cap||null,pants:k.pants,pantsShade:k.pants,glow:k.glow||null,label:k.label,pendant:k.label[0],hat:!!k.hat,flat:!!k.flat,bun:!!k.bun,skin:k.skin,skinShade:k.skin,hair:k.hair||'#111',model:k.model||null,braids:!!k.braids,kangol:!!k.kangol,bandana:k.bandana||null,noShades:!!k.noShades,noChain:!!k.noChain,chainBig:!!k.chainBig,sx:k.sx||1,sy:k.sy||1});if(k.stripe)LOOK.stripe=k.stripe;if(k.shoes)LOOK.shoes=k.shoes;DECK=DECKS.find(x=>x.id===S.deck)||DECKS[0];if(window.__engineReady)rebuildChar();return;}
+  if(cc&&cc.look){const k=cc.look;LOOK=Object.assign({},BASE_LOOK,{hoodie:k.hoodie,hoodieShade:k.shade,hoodieText:k.text,cap:k.cap||null,pants:k.pants,pantsShade:k.pants,glow:k.glow||null,label:k.label,pendant:k.label[0],hat:!!k.hat,flat:!!k.flat,bun:!!k.bun,skin:k.skin,skinShade:k.skin,hair:k.hair||'#111',model:k.model||null,braids:!!k.braids,kangol:!!k.kangol,bandana:k.bandana||null,noShades:!!k.noShades,noChain:!!k.noChain,bald:!!k.bald,chainBig:!!k.chainBig,sx:k.sx||1,sy:k.sy||1});if(k.stripe)LOOK.stripe=k.stripe;if(k.shoes)LOOK.shoes=k.shoes;DECK=DECKS.find(x=>x.id===S.deck)||DECKS[0];if(window.__engineReady)rebuildChar();return;}
   if(S.char==='ice'){LOOK=Object.assign({},ICE_LOOK);DECK=DECKS.find(x=>x.id===S.deck)||DECKS[0];if(window.__engineReady)rebuildChar();return;}const o=OUTFITS.find(x=>x.id===S.outfit)||OUTFITS[0];LOOK=Object.assign({},BASE_LOOK,{hoodie:o.hoodie,hoodieShade:o.shade,hoodieText:o.text,cap:o.cap,pants:o.pants,pantsShade:o.pantsShade,glow:o.glow||null,label:'FAME',pendant:'F',hat:true});if(o.chain)LOOK.chain=o.chain;DECK=DECKS.find(x=>x.id===S.deck)||DECKS[0];if(window.__engineReady)rebuildChar();}
 applyLook();
 
@@ -469,6 +470,7 @@ const itemCost=(it,l)=>Math.round(it.base*Math.pow(it.mult,l));
 const ARTISTS=[
  {id:'palm',name:'Lil Palmetto',genre:'Florida bounce',cost:150,rate:10,color:'#3ddc97'},
  {id:'nova',name:'Nova Reign',genre:'R&B singer',cost:600,rate:35,color:'#ff7ac3'},
+ {id:'ceo',name:'Young CEO',genre:'Boxer · rap',cost:1200,rate:60,color:'#c9c9cf'},
  {id:'bricks',name:'Bricks Mercado',genre:'Street rap',cost:2000,rate:100,color:'#ff9f43'},
  {id:'saint',name:'Saint Coral',genre:'Melodic trap',cost:6000,rate:280,color:'#54a0ff'},
  {id:'tidal',name:'Yung Tidal',genre:'Pop-rap',cost:18000,rate:800,color:'#c56cf0'},
@@ -1645,7 +1647,7 @@ function printBack(matl,url,meta,text,col){
       x.globalAlpha=.94;x.setTransform(a,b,cc,d,e,f);x.drawImage(tc,0,0);x.restore();}
     const nt=new THREE.CanvasTexture(c);nt.colorSpace=THREE.SRGBColorSpace;nt.anisotropy=8;nt.flipY=true;matl.map=nt;matl.needsUpdate=true;}).catch(e=>console.warn('print',e));
 }
-const AV_PRINT={fame:['FAME','#ffd23f'],ice:['ICE','#ffd23f']};
+const AV_PRINT={fame:['FAME','#ffd23f'],ice:['ICE','#ffd23f'],ceo:['YOUNG CEO','#ffffff']};
 function loadAvatar(key,cb){
   if(AV[key]){cb&&cb(AV[key]);return;}if(AV_LOADING[key]){if(cb)AV_LOADING[key].push(cb);return;}AV_LOADING[key]=cb?[cb]:[];
   fetch('avatars/'+key+'.fbx').then(r=>{if(!r.ok)throw 0;return r.arrayBuffer();}).then(buf=>{
@@ -1654,6 +1656,7 @@ function loadAvatar(key,cb){
     const get=(s,srgb)=>tex[s]||(tex[s]=avTex(P+s+'.webp',srgb));
     m.traverse(o=>{if(!o.isMesh)return;o.castShadow=true;o.receiveShadow=true;o.frustumCulled=false;
       const ms=(Array.isArray(o.material)?o.material:[o.material]).map(om=>{const nm=(om.name||'').toLowerCase();
+        if(/opacity|hair/.test(nm)&&key==='ceo')return new THREE.MeshBasicMaterial({name:'hair',visible:false});
         if(/opacity|hair/.test(nm))return new THREE.MeshStandardMaterial({name:'hair',map:get('hair',true),alphaTest:.42,side:THREE.DoubleSide,roughness:.7,metalness:0,envMapIntensity:.25});
         const part=/head/.test(nm)?'head':'body';
         return new THREE.MeshStandardMaterial({name:part,map:get(part,true),normalMap:get(part+'n',false),normalScale:new THREE.Vector2(.9,.9),roughness:part==='head'?.56:.78,metalness:0,envMapIntensity:.3});});
@@ -1716,7 +1719,7 @@ function buildAvChar(av){
   const L=LOOK;const root=new THREE.Group();const model=new THREE.Group();model.rotation.y=Math.PI;model.scale.set(L.sx||1,L.sy||1,L.sx||1);root.add(model);
   const body=SkeletonUtils.clone(av.scene);model.add(body);
   const HIDE=new THREE.MeshBasicMaterial({visible:false});
-  body.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;o.frustumCulled=false;if((L.bandana||L.hat||L.kangol)&&Array.isArray(o.material))o.material=o.material.map(m=>m.name==='hair'?HIDE:m);}});
+  body.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;o.frustumCulled=false;if((L.bandana||L.hat||L.kangol||L.bald)&&Array.isArray(o.material))o.material=o.material.map(m=>m.name==='hair'?HIDE:m);}});
   root.updateMatrixWorld(true);
   const bn=n=>body.getObjectByName(n),P=n=>{const b=bn(n);return b?b.getWorldPosition(new THREE.Vector3()):null;};
   const head=bn('Bip01_Head'),spine=bn('Bip01_Spine2'),Hp=P('Bip01_Head'),Np=P('Bip01_Neck'),Sp=P('Bip01_Spine2');
@@ -2198,7 +2201,7 @@ function refreshChar(anim){const c=CHARS.find(x=>x.id===S.char)||CHARS[0];const 
   if(anim)rebuildChar();}
 function switchChar(d){const i=CHARS.findIndex(x=>x.id===S.char);S.char=CHARS[(i+d+CHARS.length)%CHARS.length].id;applyLook();refreshChar(true);try{refreshMenu();}catch(e){}sfxClick();save();
   const c=CHARS.find(x=>x.id===S.char);
-  {const th=themeFor(c.id);if(th&&!charLocked(c)){initAudio();S.musicOn=true;if(musicBus)musicBus.gain.value=.72;RADIO_CUR=null;playSong(th.id);toastQuick((c.tribute?'🕯️ ':'🎵 ')+th.artist+' — '+th.name);}
+  {const th=themeFor(c.id);if(th){initAudio();S.musicOn=true;if(musicBus)musicBus.gain.value=.72;RADIO_CUR=null;playSong(th.id);toastQuick((c.tribute?'🕯️ ':'🎵 ')+th.artist+' — '+th.name);}
   else{const cur=SONGS.find(x=>x.id===curSong);if((cur&&cur.theme)||(S.musicKind==='beat'&&TRACKS[S.track].tribute)){S.track=0;if(S.musicOn&&AC)playSong('going-down');}}}
   burst(W/2,360,LOOK.glow||'#ffd23f',26,260);fovKick-=6;}
 $('chPrev').onclick=()=>switchChar(-1);$('chNext').onclick=()=>switchChar(1);
