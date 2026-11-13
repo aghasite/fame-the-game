@@ -1709,9 +1709,9 @@ function makeObj(o){
     g.userData.crown=new THREE.Group();return g;}
   if(o.k==='rock'){const r=new THREE.Mesh(rockGeo,mat(o.col,{r:.95}));r.scale.set(o.sc,o.sc*.7,o.sc*.9);r.rotation.set(o.rot,o.rot*2,0);r.position.y=o.sc*.3;r.castShadow=S.hq;g.add(r);return g;}
   if(o.k==='silo'){const c=new THREE.Mesh(G.cyl,siloMat);c.scale.set(1,o.h,1);c.position.y=o.h/2;c.castShadow=S.hq;g.add(c);const d=new THREE.Mesh(G.sph,siloMat);d.scale.set(1,.6,1);d.position.y=o.h;g.add(d);return g;}
-  if(o.k==='arch'){for(const sx of [-2.6,2.6]){g.add(box(darkMetal,.3,6.2,.3,sx,3.1,0,true));const lp=new THREE.Mesh(G.sph,ambMat);lp.scale.setScalar(.12);lp.position.set(sx,6.3,.2);g.add(lp);}
-    const sg=new THREE.Mesh(new THREE.PlaneGeometry(5.2,1.5),new THREE.MeshBasicMaterial({map:archTex(o.label,o.sub),toneMapped:false}));sg.position.set(0,5.4,.16);g.add(sg);
-    const bk=sg.clone();bk.rotation.y=Math.PI;bk.position.z=-.16;g.add(bk);g.add(box(darkMetal,5.5,1.7,.28,0,5.4,0,true));return g;}
+  if(o.k==='arch'){for(const sx of [-2.6,2.6]){g.add(box(darkMetal,.3,8.6,.3,sx,4.3,0,true));const lp=new THREE.Mesh(G.sph,ambMat);lp.scale.setScalar(.12);lp.position.set(sx,8.7,.2);g.add(lp);}
+    const sg=new THREE.Mesh(new THREE.PlaneGeometry(5.2,1.5),new THREE.MeshBasicMaterial({map:archTex(o.label,o.sub),toneMapped:false}));sg.position.set(0,7.75,.16);g.add(sg);
+    const bk=sg.clone();bk.rotation.y=Math.PI;bk.position.z=-.16;g.add(bk);g.add(box(darkMetal,5.5,1.7,.28,0,7.75,0,true));return g;}
   if(o.k==='tunnel'){const L=o.d,wall=mat('#3a3050',{r:.85}),dark=mat('#241c34',{r:.9});
     for(const sx of [-2.85,2.85]){g.add(box(wall,.5,4.7,L,sx,2.35,-L/2,true));const st=new THREE.Mesh(G.box,tunMat);st.scale.set(.06,.12,L);st.position.set(sx*.93,3.4,-L/2);g.add(st);}
     g.add(box(dark,6.2,.35,L,0,4.85,-L/2,true));
@@ -1726,8 +1726,8 @@ function makeObj(o){
       for(let z=0;z<L;z+=2.2)g.add(box(mat('#cfc8dc',{r:.5,m:.3}),.08,.7,.08,sd*2.48,.4,-z,true));
       g.add(box(mat('#7a7088',{r:.9}),.4,1.2,L,sd*2.7,-.5,-L/2));}
     return g;}
-  if(o.k==='gantry'){for(const sx of [-2.55,2.55])g.add(box(greyMat,.18,6.6,.18,sx,3.3,0,true));g.add(box(mat('#4a4460',{r:.5,m:.5}),5.3,.45,.3,0,6.3,0,true));
-    const ls=[];for(let l=0;l<3;l++){const s=new THREE.Mesh(G.sph,sigG);s.scale.setScalar(.11);s.position.set(laneX(l),6.0,.18);g.add(s);ls.push(s);}g.userData.lights=ls;return g;}
+  if(o.k==='gantry'){for(const sx of [-2.55,2.55])g.add(box(greyMat,.18,8.6,.18,sx,4.3,0,true));g.add(box(mat('#4a4460',{r:.5,m:.5}),5.3,.45,.3,0,8.3,0,true));
+    const ls=[];for(let l=0;l<3;l++){const s=new THREE.Mesh(G.sph,sigG);s.scale.setScalar(.11);s.position.set(laneX(l),8.0,.18);g.add(s);ls.push(s);}g.userData.lights=ls;return g;}
   return null;
 }
 function tame(root){root.traverse(o=>{if(!o.material)return;(Array.isArray(o.material)?o.material:[o.material]).forEach(m=>{if(m.isMeshStandardMaterial&&!m.userData.tamed){m.userData.tamed=true;m.envMapIntensity=m.metalness>=.5?Math.min(m.envMapIntensity??1,1.3):Math.min(m.envMapIntensity??1,.22);}});});return root;}
