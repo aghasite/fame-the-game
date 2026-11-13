@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#0b0618">
 <meta name="description" content="Fame the Game — run the Cape Coral tracks, stack coins and build Fame Records into an empire.">
-<title>Fame the Game 3D</title>
+<title>Fame the Game</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23fff3b0'/%3E%3Cstop offset='1' stop-color='%23ff8a3d'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%231a0b2e'/%3E%3Cpath d='M14 22l8 7 10-12 10 12 8-7-3 16H17z' fill='url(%23g)'/%3E%3Ctext x='32' y='58' font-family='Arial Black,Arial' font-weight='900' font-size='19' text-anchor='middle' fill='url(%23g)'%3EFAME%3C/text%3E%3C/svg%3E">
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 <link rel="manifest" href="manifest.json">
@@ -44,7 +44,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:radial-gradient(elli
 .coin{width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fffbe0,#ffd23f 40%,#d9900b 85%);box-shadow:inset 0 0 0 2px #e0a420,0 0 8px rgba(255,210,63,.5);display:inline-block;flex:none}
 /* menu */
 #menu{background:linear-gradient(180deg,rgba(10,4,26,.25),rgba(10,4,26,0) 30%,rgba(10,4,26,.15) 55%,rgba(10,4,26,.92));padding-top:22px}
-#logo{width:330px;height:auto;filter:drop-shadow(0 10px 24px rgba(255,80,170,.45))}
+#logo{width:340px;height:auto;filter:drop-shadow(0 12px 26px rgba(255,190,60,.45)) drop-shadow(0 0 2px rgba(0,0,0,.6))}
 @keyframes float{50%{transform:translateY(-6px) rotate(-.6deg)}}
 #avatar{width:196px;height:220px;margin-top:-10px}
 .menuinfo{display:flex;gap:10px;align-items:center;margin-top:-4px}
@@ -276,27 +276,39 @@ body.cine #lbTop,body.cine #lbBot{transform:none}
       <button class="btn ghost" id="setBtn" aria-label="Settings">⚙️</button>
       <span class="coinpill"><i class="coin"></i><span id="mCoins">0</span></span>
     </div>
-    <svg id="logo" viewBox="0 0 400 210" aria-label="Fame the Game">
+    <svg id="logo" viewBox="0 0 400 220" aria-label="Fame the Game">
       <defs>
-        <linearGradient id="lgGold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffbe0"/><stop offset=".42" stop-color="#ffd23f"/><stop offset=".5" stop-color="#e89a12"/><stop offset=".75" stop-color="#ffc14d"/><stop offset="1" stop-color="#ff7a3d"/></linearGradient>
-        <linearGradient id="lgRib" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff9fd6"/><stop offset="1" stop-color="#c22d84"/></linearGradient>
-        <linearGradient id="lgShine" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".85"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
-        <clipPath id="fameClip"><text x="200" y="138" text-anchor="middle" font-family="Bungee,Arial Black,sans-serif" font-size="108">FAME</text></clipPath>
+        <linearGradient id="lgGold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffdf0"/><stop offset=".18" stop-color="#ffe9a3"/><stop offset=".38" stop-color="#f5c542"/><stop offset=".5" stop-color="#b57a12"/><stop offset=".56" stop-color="#ffe08a"/><stop offset=".78" stop-color="#e2a52a"/><stop offset="1" stop-color="#8a5208"/></linearGradient>
+        <linearGradient id="lgChrome" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".45" stop-color="#d9dde6"/><stop offset=".5" stop-color="#7d8496"/><stop offset=".7" stop-color="#eef1f6"/><stop offset="1" stop-color="#9aa1b2"/></linearGradient>
+        <linearGradient id="lgPlaque" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a1424"/><stop offset="1" stop-color="#050308"/></linearGradient>
+        <linearGradient id="lgShine" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+        <radialGradient id="lgGem" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#ffffff"/><stop offset=".35" stop-color="#bfefff"/><stop offset="1" stop-color="#3a8cff"/></radialGradient>
+        <radialGradient id="lgRuby" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".3" stop-color="#ff7aa8"/><stop offset="1" stop-color="#a0103a"/></radialGradient>
+        <filter id="lgGlow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <clipPath id="fameClip"><text x="200" y="136" font-family="Bungee,Arial Black,sans-serif" font-size="104" text-anchor="middle">FAME</text></clipPath>
       </defs>
-      <!-- crown -->
-      <g transform="translate(200 36)">
-        <path d="M-44 18 L-34 -14 L-16 6 L0 -24 L16 6 L34 -14 L44 18 Z" fill="url(#lgGold)" stroke="#3a0f4a" stroke-width="5" stroke-linejoin="round"/>
-        <circle cx="0" cy="-24" r="6" fill="#ff5fb0" stroke="#3a0f4a" stroke-width="3"/><circle cx="-34" cy="-14" r="5" fill="#4ff7ff" stroke="#3a0f4a" stroke-width="3"/><circle cx="34" cy="-14" r="5" fill="#4ff7ff" stroke="#3a0f4a" stroke-width="3"/>
+      <!-- diamond crown -->
+      <g transform="translate(200 34)" filter="url(#lgGlow)">
+        <path d="M-50 22 L-40 -12 L-20 8 L0 -26 L20 8 L40 -12 L50 22 Z" fill="url(#lgGold)" stroke="#2a1404" stroke-width="3.5" stroke-linejoin="round"/>
+        <path d="M-50 22 L50 22 L46 30 L-46 30 Z" fill="url(#lgGold)" stroke="#2a1404" stroke-width="3" stroke-linejoin="round"/>
+        <path d="M-40 -12 L-30 14 M0 -26 L0 14 M40 -12 L30 14 M-20 8 L-10 20 M20 8 L10 20" stroke="#fff6c8" stroke-width="1.2" opacity=".7"/>
+        <g stroke="#0b2a5a" stroke-width="1.5"><path d="M0 -36 L7 -26 L0 -18 L-7 -26 Z" fill="url(#lgGem)"/><circle cx="-40" cy="-16" r="5" fill="url(#lgGem)"/><circle cx="40" cy="-16" r="5" fill="url(#lgGem)"/></g>
+        <g stroke="#3a0612" stroke-width="1.2"><path d="M0 16 l6 6 -6 6 -6 -6z" fill="url(#lgRuby)"/><circle cx="-24" cy="25" r="3.2" fill="url(#lgGem)"/><circle cx="24" cy="25" r="3.2" fill="url(#lgGem)"/><circle cx="-38" cy="25" r="2.6" fill="url(#lgRuby)"/><circle cx="38" cy="25" r="2.6" fill="url(#lgRuby)"/></g>
       </g>
-      <text x="200" y="138" text-anchor="middle" font-family="Bungee,Arial Black,sans-serif" font-size="108" fill="#3a0f4a" stroke="#3a0f4a" stroke-width="18" stroke-linejoin="round">FAME</text>
-      <text x="200" y="132" text-anchor="middle" font-family="Bungee,Arial Black,sans-serif" font-size="108" fill="#a3245f" stroke="#a3245f" stroke-width="8" stroke-linejoin="round">FAME</text>
-      <text x="200" y="132" text-anchor="middle" font-family="Bungee,Arial Black,sans-serif" font-size="108" fill="url(#lgGold)">FAME</text>
-      <g clip-path="url(#fameClip)" transform="translate(0 -6)"><rect x="-120" y="40" width="90" height="120" fill="url(#lgShine)" transform="skewX(-20)"><animate attributeName="x" values="-160;520;520" dur="3.6s" repeatCount="indefinite"/></rect></g>
-      <!-- ribbon -->
-      <path d="M78 150 L322 150 L312 170 L322 190 L78 190 L88 170 Z" fill="#3a0f4a" transform="translate(0 4)"/>
-      <path d="M78 150 L322 150 L312 170 L322 190 L78 190 L88 170 Z" fill="url(#lgRib)" stroke="#3a0f4a" stroke-width="4" stroke-linejoin="round"/>
-      <text x="200" y="179" text-anchor="middle" font-family="Bungee,Arial Black,sans-serif" font-size="23" fill="#fff" letter-spacing="3">THE GAME 3D</text>
-      <g fill="#fff"><path d="M50 60 l3 9 9 3 -9 3 -3 9 -3 -9 -9 -3 9 -3z"><animate attributeName="opacity" values="0;1;0" dur="2.2s" repeatCount="indefinite"/></path><path d="M352 96 l2.5 7 7 2.5 -7 2.5 -2.5 7 -2.5 -7 -7 -2.5 7 -2.5z"><animate attributeName="opacity" values="1;0;1" dur="1.8s" repeatCount="indefinite"/></path></g>
+      <!-- 3D extruded gold lettering -->
+      <text x="200" y="146" font-family="Bungee,Arial Black,sans-serif" font-size="104" text-anchor="middle" fill="#000" opacity=".45" stroke="#000" stroke-width="14" stroke-linejoin="round" filter="url(#lgGlow)">FAME</text>
+      <text x="200" y="145" font-family="Bungee,Arial Black,sans-serif" font-size="104" text-anchor="middle" fill="#1a0d02">FAME</text><text x="200" y="144" font-family="Bungee,Arial Black,sans-serif" font-size="104" text-anchor="middle" fill="#3a1d04">FAME</text><text x="200" y="143" font-family="Bungee,Arial Black,sans-serif" font-size="104" text-anchor="middle" fill="#5a2e06">FAME</text><text x="200" y="142" font-family="Bungee,Arial Black,sans-serif" font-size="104" text-anchor="middle" fill="#6e3a08">FAME</text><text x="200" y="141" font-family="Bungee,Arial Black,sans-serif" font-size="104" text-anchor="middle" fill="#7f450a">FAME</text><text x="200" y="140" font-family="Bungee,Arial Black,sans-serif" font-size="104" text-anchor="middle" fill="#8f500c">FAME</text><text x="200" y="139" font-family="Bungee,Arial Black,sans-serif" font-size="104" text-anchor="middle" fill="#a0600f">FAME</text><text x="200" y="138" font-family="Bungee,Arial Black,sans-serif" font-size="104" text-anchor="middle" fill="#b06e12">FAME</text>
+      <text x="200" y="136" font-family="Bungee,Arial Black,sans-serif" font-size="104" text-anchor="middle" fill="none" stroke="#2a1404" stroke-width="10" stroke-linejoin="round">FAME</text>
+      <text x="200" y="136" font-family="Bungee,Arial Black,sans-serif" font-size="104" text-anchor="middle" fill="url(#lgGold)" stroke="url(#lgChrome)" stroke-width="2.5" stroke-linejoin="round">FAME</text>
+      <text x="200" y="136" font-family="Bungee,Arial Black,sans-serif" font-size="104" text-anchor="middle" fill="none" stroke="#ffffff" stroke-width="3.4" stroke-linecap="round" stroke-dasharray="0 7.5" opacity=".95">FAME</text>
+      <g clip-path="url(#fameClip)"><rect x="-120" y="30" width="70" height="130" fill="url(#lgShine)" transform="skewX(-22)"><animate attributeName="x" values="-160;560;560" dur="3.4s" repeatCount="indefinite"/></rect></g>
+      <!-- onyx plaque -->
+      <rect x="92" y="156" width="216" height="36" rx="10" fill="url(#lgPlaque)" stroke="url(#lgGold)" stroke-width="3"/>
+      <rect x="98" y="161" width="204" height="26" rx="7" fill="none" stroke="#f5c542" stroke-opacity=".35" stroke-width="1"/>
+      <path d="M58 174 H86 M314 174 H342" stroke="url(#lgGold)" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M52 174 l5 -5 5 5 -5 5z M338 174 l5 -5 5 5 -5 5z" fill="url(#lgGem)" stroke="#0b2a5a" stroke-width="1"/>
+      <text x="200" y="182" text-anchor="middle" font-family="Outfit,Arial,sans-serif" font-weight="800" font-size="19" fill="url(#lgGold)" letter-spacing="9">THE GAME</text>
+      <g fill="#fff"><path d="M48 70 l3 9 9 3 -9 3 -3 9 -3 -9 -9 -3 9 -3z"><animate attributeName="opacity" values="0;1;0" dur="2.2s" repeatCount="indefinite"/></path><path d="M352 100 l2.5 7 7 2.5 -7 2.5 -2.5 7 -2.5 -7 -7 -2.5 7 -2.5z"><animate attributeName="opacity" values="1;0;1" dur="1.8s" repeatCount="indefinite"/></path><path d="M300 40 l2 6 6 2 -6 2 -2 6 -2 -6 -6 -2 6 -2z"><animate attributeName="opacity" values="0;1;0" dur="1.4s" repeatCount="indefinite"/></path><path d="M120 196 l2 5 5 2 -5 2 -2 5 -2 -5 -5 -2 5 -2z"><animate attributeName="opacity" values="1;0;1" dur="2.6s" repeatCount="indefinite"/></path></g>
     </svg>
     <canvas id="avatar" width="420" height="472"></canvas>
     <div id="charbar"><button class="arrow" id="chPrev" aria-label="Previous character"><svg class="ico" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><div id="charName"><b></b><small></small><em></em></div><button class="arrow" id="chNext" aria-label="Next character"><svg class="ico" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button></div>
@@ -2738,14 +2750,14 @@ async function shareRun(){
     g.textAlign='center';g.textBaseline='middle';
     const gold=g.createLinearGradient(0,60,0,200);gold.addColorStop(0,'#fff7c2');gold.addColorStop(.5,'#ffd23f');gold.addColorStop(1,'#ff8a3d');
     g.font='bold 120px Bungee, Arial Black, sans-serif';g.lineWidth=18;g.strokeStyle='#3a0f4a';g.strokeText('FAME',540,140);g.fillStyle=gold;g.fillText('FAME',540,140);
-    g.font='bold 40px Bungee, Arial Black, sans-serif';g.fillStyle='#ff9fd6';g.fillText('THE GAME 3D',540,225);
+    g.font='bold 40px Bungee, Arial Black, sans-serif';g.fillStyle='#ff9fd6';g.fillText('THE GAME',540,225);
     g.font='bold 54px Bungee, Arial Black, sans-serif';g.fillStyle='#fff';g.fillText(LASTRUN.char,540,880);
     g.font='bold 170px Bungee, Arial Black, sans-serif';g.fillStyle=gold;g.shadowColor='rgba(255,210,63,.6)';g.shadowBlur=40;g.fillText(fmt(LASTRUN.sc),540,1030);g.shadowBlur=0;
     g.font='600 40px Outfit, Arial, sans-serif';g.fillStyle='#d9c8ff';g.fillText(`${fmt(LASTRUN.d)}m  ·  ${fmt(LASTRUN.coins)} coins  ·  ${rankName()}`,540,1140);
     g.font='bold 34px Outfit, Arial, sans-serif';g.fillStyle='#9fe8ff';g.fillText('Can you beat me? kalsoomsite.github.io/fame-3d',540,1250);
     const blob=await new Promise(r=>c.toBlob(r,'image/png'));
     const file=new File([blob],'fame-the-game-run.png',{type:'image/png'});
-    if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file],title:'Fame the Game',text:`I scored ${fmt(LASTRUN.sc)} in Fame the Game 3D! 🎤 https://kalsoomsite.github.io/fame-3d/`});}
+    if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file],title:'Fame the Game',text:`I scored ${fmt(LASTRUN.sc)} in Fame the Game! 🎤 https://kalsoomsite.github.io/fame-3d/`});}
     else{const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='fame-the-game-run.png';document.body.appendChild(a);a.click();a.remove();toastQuick('📸 Score card saved');}
   }catch(e){if(e&&e.name!=='AbortError')toastQuick('Couldn’t share — try again');}
 }
