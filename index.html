@@ -1275,7 +1275,7 @@ function makeBeacon(col,s=1){const b=new THREE.Group();const body=new THREE.Mesh
 // railway signal head: backplate, three hooded lenses, glow
 const lensGeo=new THREE.CircleGeometry(.075,24),hoodGeo=new THREE.CylinderGeometry(.088,.088,.13,20,1,true,0,Math.PI);hoodGeo.rotateX(Math.PI/2);
 const lensOff={r:new THREE.MeshStandardMaterial({color:'#3a0d10',roughness:.15,metalness:.2}),a:new THREE.MeshStandardMaterial({color:'#3a2a08',roughness:.15,metalness:.2}),g:new THREE.MeshStandardMaterial({color:'#0b2a16',roughness:.15,metalness:.2})};
-const lensOn={r:new THREE.MeshStandardMaterial({color:'#ff2a3a',emissive:'#ff2a3a',emissiveIntensity:6}),a:new THREE.MeshStandardMaterial({color:'#ffb020',emissive:'#ffaa10',emissiveIntensity:6}),g:new THREE.MeshStandardMaterial({color:'#2aff7a',emissive:'#2aff7a',emissiveIntensity:6})};
+const lensOn={r:new THREE.MeshStandardMaterial({color:'#ff2a3a',emissive:'#ff2a3a',emissiveIntensity:2.2}),a:new THREE.MeshStandardMaterial({color:'#ffb020',emissive:'#ffaa10',emissiveIntensity:2.2}),g:new THREE.MeshStandardMaterial({color:'#2aff7a',emissive:'#2aff7a',emissiveIntensity:2.2})};
 const LCOL={r:'#ff2a3a',a:'#ffaa10',g:'#2aff7a'};
 function makeSignalHead(){const h=new THREE.Group();const bp=box(housingMat,.3,.68,.08,0,0,0);h.add(bp);const rim=box(mat('#f2f2f2',{r:.5}),.32,.7,.02,0,0,-.045);h.add(rim);
   const L={};['r','a','g'].forEach((k,i)=>{const y=.2-i*.2;const ln=new THREE.Mesh(lensGeo,lensOff[k]);ln.position.set(0,y,.042);h.add(ln);const hd=new THREE.Mesh(hoodGeo,housingMat);hd.position.set(0,y+.005,.1);h.add(hd);
@@ -1991,7 +1991,8 @@ function printBack(matl,url,meta,text,col){
   Promise.all([img.decode(),isImg?li.decode():0,document.fonts?document.fonts.load('bold 120px Bungee').catch(()=>0):0]).then(()=>{
     const BW=img.naturalWidth,BH=img.naturalHeight,c=document.createElement('canvas');c.width=BW;c.height=BH;const x=c.getContext('2d');x.drawImage(img,0,0);
     const TW=640,TH=isImg?640:Math.round(640*.062/.15),tc=document.createElement('canvas');tc.width=TW;tc.height=TH;const t=tc.getContext('2d');
-    if(isImg){const sc=Math.min(TW*.96/li.naturalWidth,TH*.96/li.naturalHeight),w=li.naturalWidth*sc,h=li.naturalHeight*sc;t.shadowColor='rgba(0,0,0,.6)';t.shadowBlur=10;t.drawImage(li,(TW-w)/2,(TH-h)/2,w,h);meta={back:meta.backL};}
+    if(isImg){const sc=Math.min(TW*.96/li.naturalWidth,TH*.96/li.naturalHeight),w=li.naturalWidth*sc,h=li.naturalHeight*sc;const lc=document.createElement('canvas');lc.width=TW;lc.height=TH;const lx=lc.getContext('2d');lx.drawImage(li,(TW-w)/2,(TH-h)/2,w,h);lx.globalCompositeOperation='source-in';lx.fillStyle=col==='#fff'?'#ffffff':col;lx.fillRect(0,0,TW,TH);
+      for(const [dx,dy] of [[-4,0],[4,0],[0,-4],[0,4],[-3,-3],[3,3],[-3,3],[3,-3]])t.drawImage(lc,dx,dy);t.shadowColor='rgba(0,0,0,.6)';t.shadowBlur=8;t.drawImage(li,(TW-w)/2,(TH-h)/2,w,h);meta={back:meta.backL};}
     let fs=TH*.9;if(!isImg){t.font=`${fs}px Bungee, Arial Black, sans-serif`;while(t.measureText(text).width>TW*.94&&fs>20){fs-=4;t.font=`${fs}px Bungee, Arial Black, sans-serif`;}
     t.textAlign='center';t.textBaseline='middle';t.lineJoin='round';t.lineWidth=fs*.09;t.strokeStyle='rgba(10,8,14,.9)';t.strokeText(text,TW/2,TH*.54);t.fillStyle=col;t.fillText(text,TW/2,TH*.54);}
     for(const [pa,pb,pc,ua,ub,uc] of meta.back){const P=[pa,pb,pc].map(p=>[p[0]*TW,p[1]*TH]),Q=[ua,ub,uc].map(u=>[u[0]*BW,(1-u[1])*BH]);
@@ -2002,7 +2003,7 @@ function printBack(matl,url,meta,text,col){
       x.globalAlpha=.94;x.setTransform(a,b,cc,d,e,f);x.drawImage(tc,0,0);x.restore();}
     const nt=new THREE.CanvasTexture(c);nt.colorSpace=THREE.SRGBColorSpace;nt.anisotropy=8;nt.flipY=true;matl.map=nt;matl.needsUpdate=true;}).catch(e=>console.warn('print',e));
 }
-const AV_PRINT={fame:['img:logos/logo_fame.webp','#fff'],ice:['img:logos/logo_chinaman.webp','#fff'],ceo:['YOUNG CEO','#ffffff']};
+const AV_PRINT={fame:['img:logos/logo_fame.webp','#111111'],ice:['img:logos/logo_chinaman.webp','#ffd23f'],ceo:['YOUNG CEO','#ffffff']};
 function loadAvatar(key,cb){
   if(AV[key]){cb&&cb(AV[key]);return;}if(AV_LOADING[key]){if(cb)AV_LOADING[key].push(cb);return;}AV_LOADING[key]=cb?[cb]:[];
   fetch('avatars/'+key+'.fbx').then(r=>{if(!r.ok)throw 0;return r.arrayBuffer();}).then(buf=>{
