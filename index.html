@@ -2209,7 +2209,7 @@ function printBack(matl,url,meta,text,col,tint){
 const AV_PRINT={fame:['img:logos/logo_fame.webp','#111111'],ice:['img:logos/logo_chinaman.webp','#ffd23f'],agha:['img:logos/logo_anm.webp','#111111'],ceo:['YOUNG CEO','#ffffff']};
 const FACE_TEX={};
 const FACE_PH={agha:{lm:[[192,208],[320,204],[256,352]],top:1.0,rb:1.5},em:{lm:[[174,228],[308,206],[248,354]],top:.95,rx:1.08,rb:1.62,eye:.5},snoop:{lm:[[190,191],[318,180],[264,304]],top:1.3},pac:{lm:[[175,218],[310,216],[250,367]],top:1.4},fame:{lm:[[193,207],[321,202],[261,325]],top:.7,rb:1.5},ice:{lm:[[162,255],[293,201],[281,382]],top:1.4}};
-if(/[?&]nofaces/.test(location.search))for(const k in FACE_PH)delete FACE_PH[k];
+if(!/[?&]allfaces/.test(location.search))for(const k in FACE_PH)delete FACE_PH[k];
 // project a front photo onto the 3D face (in model space, not UV space) and feather it into the head skin
 function faceProject(matl,baseUrl,key,meta){const cfg=FACE_PH[key];if(!cfg||!meta||!meta.face||!meta.face.length||!meta.eXs)return;
   const bi=new Image(),pi=new Image();bi.crossOrigin=pi.crossOrigin='anonymous';bi.src=baseUrl;pi.src='faces/'+key+'_photo.jpg?v=2';
@@ -2432,18 +2432,6 @@ function poseAv(c,dt,st){
   // slide: torso back, legs shot forward, one arm trailing, head looking ahead
   if(sw>.001){boneAdd(B.sp,X,sw*.3);boneAdd(B.hd,X,-sw*.95);boneAdd(B.lt,X,sw*1.3);boneAdd(B.lc,X,-sw*.05);boneAdd(B.lf,X,-sw*.5);boneAdd(B.rt,X,sw*.55);boneAdd(B.rc,X,-sw*1.5);
     boneAdd(B.la,X,-sw*1.15);boneAdd(B.lfa,X,-sw*.2);boneAdd(B.ra,X,sw*.2);boneAdd(B.rfa,X,sw*.9);}
-  // signature grooves: each character dances their own way
-  {const dn=(c.danceT>0&&mode==='menu')?1:0;P.dw=lr(P.dw||0,dn,Math.min(1,dt*5));const d=P.dw;if(d>.01){const t=P.t,id=S.char;_v.set(0,1,0);const Y=_v.clone();_v.set(0,0,1).applyQuaternion(c.root.getWorldQuaternion(_rq));const Z=_v.clone();
-    const b4=Math.sin(t*6.3),b2=Math.sin(t*3.15),b8=Math.sin(t*12.6);
-    if(id==='snoop'){boneAdd(B.sp,Z,d*b2*.16);boneAdd(B.hd,X,d*(.12+b4*.06));boneAdd(B.la,X,d*(.5+b2*.25));boneAdd(B.ra,X,d*(.5-b2*.25));boneAdd(B.lfa,X,d*.9);boneAdd(B.rfa,X,d*.9);boneAdd(B.lt,X,d*.18);boneAdd(B.lc,X,-d*.3);}
-    else if(id==='biggie'){boneAdd(B.sp,X,d*(.1+Math.abs(b4)*.08));boneAdd(B.sp2,Z,d*b2*.12);boneAdd(B.la,X,d*.35);boneAdd(B.ra,X,d*.35);boneAdd(B.lfa,X,d*(1.1+b4*.2));boneAdd(B.rfa,X,d*(1.1-b4*.2));boneAdd(B.hd,X,d*b4*.1);}
-    else if(id==='pac'){boneAdd(B.ra,X,d*(2.3+b4*.15));boneAdd(B.rfa,X,d*.5);boneAdd(B.la,X,d*(.6+b2*.3));boneAdd(B.lfa,X,d*.8);boneAdd(B.sp,Y,d*b2*.25);boneAdd(B.hd,X,d*b4*.12);}
-    else if(id==='em'){boneAdd(B.ra,X,d*(1.3+b8*.25));boneAdd(B.rfa,X,d*(1.0+b8*.3));boneAdd(B.la,X,d*.2);boneAdd(B.sp,X,d*(.18+Math.abs(b4)*.06));boneAdd(B.hd,X,d*(Math.abs(b4)*.18));}
-    else if(id==='ceo'){const j=Math.max(0,b4),k2=Math.max(0,-b4);boneAdd(B.ra,X,d*(1.2+j*.9));boneAdd(B.rfa,X,d*(1.6-j*1.4));boneAdd(B.la,X,d*(1.2+k2*.9));boneAdd(B.lfa,X,d*(1.6-k2*1.4));boneAdd(B.sp,Y,d*b4*.3);boneAdd(B.sp,X,d*.15);}
-    else if(id==='ice'){boneAdd(B.sp,X,d*(.2+Math.abs(b8)*.07));boneAdd(B.la,X,d*(1.9+b8*.2));boneAdd(B.ra,X,d*(1.9-b8*.2));boneAdd(B.lfa,X,d*.6);boneAdd(B.rfa,X,d*.6);boneAdd(B.pel,Z,d*b4*.12);}
-    else if(id==='fame'){boneAdd(B.sp,Z,d*b4*.14);boneAdd(B.ra,X,d*(1.6+b4*.5));boneAdd(B.la,X,d*(.4-b4*.3));boneAdd(B.rfa,X,d*.7);boneAdd(B.pel,Y,d*b2*.3);}
-    else if(id==='agha'){boneAdd(B.la,X,d*(.9+b4*.4));boneAdd(B.ra,X,d*(.9-b4*.4));boneAdd(B.lfa,X,d*.9);boneAdd(B.rfa,X,d*.9);boneAdd(B.sp,Y,d*b2*.35);boneAdd(B.hd,Y,-d*b2*.2);}
-    if(c.A.dance)c.A.dance.timeScale=({snoop:.5,biggie:.6,pac:.85,em:1.15,ceo:1.25,ice:1.3,fame:1.05,agha:.9})[id]||1;}}
   // superman: right fist punched forward, left arm swept back, legs together, head up
   if(jw>.001){boneAdd(B.hd,X,jw*.95);boneAdd(B.nk,X,jw*.25);boneAdd(B.ra,X,jw*2.85);boneAdd(B.rfa,X,jw*.1);boneAdd(B.la,X,-jw*.35);
     _v.set(0,0,1).applyQuaternion(c.root.getWorldQuaternion(_rq));boneAdd(B.lt,_v,jw*.09);boneAdd(B.rt,_v,-jw*.09);boneAdd(B.lt,X,-jw*.08);boneAdd(B.rt,X,-jw*.02);boneAdd(B.lc,X,-jw*.25);boneAdd(B.rc,X,-jw*.1);
@@ -2465,7 +2453,7 @@ function poseAv(c,dt,st){
 function animXChar(dt){
   const c=CH,inMenu=!(mode==='play'||mode==='pause'||mode==='revive'||mode==='over');
   const board=(inMenu&&!(c.danceT>0))||(R.board>0&&!R.finale),jet=!inMenu&&R.jet>0,roll=!inMenu&&R.slide>0&&R.onGround,air=!inMenu&&!R.onGround&&!jet&&R.alive,dead=!inMenu&&!R.alive&&!R.won;
-  if(c.danceT>0)c.danceT-=dt;if(inMenu&&mode==='menu'){c.menuT=(c.menuT||0)+dt;if(c.menuT>5){c.menuT=0;c.danceT=6;}}
+  if(c.danceT>0)c.danceT-=dt;if(inMenu&&mode==='menu'){c.menuT=(c.menuT||0)+dt;if(c.menuT>13){c.menuT=0;c.danceT=5.5;}}
   const dancing=!!c.A.dance&&((c.danceT>0&&inMenu&&mode==='menu')||(R.finale&&(R.speed<3||mode==='over')));
   const want={idle:(!dancing&&(inMenu||board||jet||dead))?1:0,run:(!dancing&&!inMenu&&!board&&!jet&&!dead)?1:0,walk:0,dance:dancing?1:0};
   const k=Math.min(1,dt*8);for(const n in want){c.w[n]=lr(c.w[n],want[n],k);if(c.A[n])c.A[n].setEffectiveWeight(c.w[n]);}
