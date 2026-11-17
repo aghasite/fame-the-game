@@ -337,6 +337,10 @@ html,body{font-family:'Outfit',system-ui,sans-serif;letter-spacing:.2px}
 @keyframes crownP{to{box-shadow:inset 0 0 150px rgba(255,196,60,.8),inset 0 0 34px rgba(255,236,170,.7)}}
 #charbar{text-shadow:0 2px 10px rgba(0,0,0,.9)}
 .lockup{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:14px;opacity:.85}.lockup img{height:30px;width:auto}.lockup i{width:1px;height:22px;background:rgba(242,199,107,.7)}
+#fameL{top:132px!important}
+#charName b{background:none!important;-webkit-background-clip:border-box!important;background-clip:border-box!important;color:#fff!important;-webkit-text-fill-color:#fff;filter:none!important;text-shadow:0 2px 8px rgba(0,0,0,.95),0 0 18px rgba(0,0,0,.6)}
+#charName.locked b{filter:none!important;opacity:.8}
+body:not(.playing) #toast{top:206px;width:340px;font-size:12.5px}
 </style>
 </head>
 <body>
@@ -779,9 +783,9 @@ function spawnRow(z){
   for(let i=0;i<nBlock;i++){
     const ln=lanes[i],x=laneX(ln),r=Math.random();
     if(!laneFree(ln,z))continue;
-    if(!trainUsed&&r<.42&&spanFree(ln,z,z+20)){
+    if(!trainUsed&&r<.42&&spanFree(ln,z,z+20)&&[0,1,2].filter(l=>l!==ln&&!spanFree(l,z-7,z+27)).length<2){
       trainUsed=true;
-      const moving=R.dist>150&&Math.random()<.34+hard*.3&&spanFree(ln,-2,z+40);
+      const moving=R.dist>150&&Math.random()<.34+hard*.3&&spanFree(ln,-2,z+40)&&[0,1,2].filter(l=>l!==ln&&!spanFree(l,0,z+40)).length<1;
       const d=moving?rnd(9,13):rnd(9,15);
       if(moving){const th=Math.random();const theme=th<.3?'fame':th<.6?'cm':null;R.objs.push({k:'train',lane:ln,x,z:z+16,d,v:rnd(8,12),col:theme==='fame'?['#d4af37','#111111','#ffffff']:theme==='cm'?['#c8102e','#111111','#ffd23f']:['#e8323c','#9a1f27','#ffb3b8'],moving:true,horn:false,theme});}
       else{
@@ -1062,6 +1066,8 @@ scene.environment=pmrem.fromScene(new RoomEnvironment(),.04).texture;
 setTimeout(()=>tame(scene),0);
 let composer=null,bloom=null,qScale=1;
 let GRADE=null;
+renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();try{save();}catch(_){}setTimeout(()=>location.reload(),400);});
+window.addEventListener('error',e=>{window.__lastErr=e.message;});
 function setupCanvas(){
   const k=Math.min(innerWidth/W,innerHeight/H);
   const d=Math.max(.6,(S.hq?Math.min(2,(devicePixelRatio||1)*k):Math.min(1,(devicePixelRatio||1)*k*.8))*qScale);
@@ -1069,7 +1075,7 @@ function setupCanvas(){
   renderer.shadowMap.enabled=S.hq;
   const od=Math.max(1,Math.min(2,d));ov.width=Math.round(W*od);ov.height=Math.round(H*od);ctx.setTransform(ov.width/W,0,0,ov.height/H,0,0);
   if(composer&&composer.dispose)composer.dispose();
-  if(S.hq){const rt=new THREE.WebGLRenderTarget(Math.round(W*d),Math.round(H*d),{type:THREE.HalfFloatType,samples:4});composer=new EffectComposer(renderer,rt);composer.setPixelRatio(d);composer.setSize(W,H);composer.addPass(new RenderPass(scene,camera));
+  if(S.hq){const rt=new THREE.WebGLRenderTarget(Math.round(W*d),Math.round(H*d),{type:THREE.HalfFloatType,samples:(/Android|iPhone|iPad|Mobile/i.test(navigator.userAgent)?0:4)});composer=new EffectComposer(renderer,rt);composer.setPixelRatio(d);composer.setSize(W,H);composer.addPass(new RenderPass(scene,camera));
     bloom=new UnrealBloomPass(new THREE.Vector2(W,H),.55,.4,2.4);composer.addPass(bloom);composer.addPass(new OutputPass());
     GRADE=new ShaderPass({uniforms:{tDiffuse:{value:null},time:{value:0},res:{value:new THREE.Vector2(W,H)},speed:{value:0}},
       vertexShader:'varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
@@ -2101,6 +2107,7 @@ const RB_CHAIN=[['LeftShoulder','LeftArm'],['LeftArm','LeftForeArm'],['LeftForeA
   ['LeftUpLeg','LeftLeg'],['LeftLeg','LeftFoot'],['LeftFoot','LeftToeBase'],['RightUpLeg','RightLeg'],['RightLeg','RightFoot'],['RightFoot','RightToeBase']];
 const AV={},AV_LOADING={};const AV_TEX=new THREE.TextureLoader();
 function platinumTex(url){const t=new THREE.Texture();t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=8;const im=new Image();im.crossOrigin='anonymous';im.onload=()=>{const c=document.createElement('canvas');c.width=im.naturalWidth;c.height=im.naturalHeight;const x=c.getContext('2d');x.drawImage(im,0,0);const d=x.getImageData(0,0,c.width,c.height),q=d.data;for(let i=0;i<q.length;i+=4){const l=(q[i]*.3+q[i+1]*.59+q[i+2]*.11)/255;const k=Math.min(1,.4+l*.7);q[i]=34*k;q[i+1]=27*k;q[i+2]=22*k;}x.putImageData(d,0,0);t.image=c;t.needsUpdate=true;};im.src=url;return t;}
+function darkHairTex(url){const t=new THREE.Texture();t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=8;const im=new Image();im.crossOrigin='anonymous';im.onload=()=>{const c=document.createElement('canvas');c.width=im.naturalWidth;c.height=im.naturalHeight;const x=c.getContext('2d');x.drawImage(im,0,0);const H2=Math.floor(c.height*.5);const d=x.getImageData(0,0,c.width,H2),q=d.data;for(let i=0;i<q.length;i+=4){const r=q[i],g=q[i+1],b=q[i+2];if(r>70&&(g-b)>(r-g)*1.35&&(g-b)>14){const k=Math.min(1,((g-b)-(r-g)*1.35)/18);const l=(r+g+b)/765;q[i]=r+(46*l-r)*k;q[i+1]=g+(36*l-g)*k;q[i+2]=b+(30*l-b)*k;}}x.putImageData(d,0,0);t.image=c;t.needsUpdate=true;};im.src=url;return t;}
 function avTex(u,srgb){const t=AV_TEX.load(u);if(srgb)t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=8;return t;}
 function retargetClip(srcScene,clip,tgt){
   const src=SkeletonUtils.clone(srcScene);src.updateMatrixWorld(true);
@@ -2192,17 +2199,17 @@ function loadAvatar(key,cb){
   fetch('avatars/'+key+'.fbx').then(r=>{if(!r.ok)throw 0;return r.arrayBuffer();}).then(buf=>{
     const m=new FBXLoader().parse(buf,'');m.animations.length=0;
     const P='avatars/'+key+'_';const tex={};
-    const get=(s,srgb)=>tex[s]||(tex[s]=avTex(P+s+'.webp?v=18',srgb));
+    const get=(s,srgb)=>tex[s]||(tex[s]=avTex(P+s+'.webp?v=19',srgb));
     m.traverse(o=>{if(!o.isMesh)return;o.castShadow=true;o.receiveShadow=true;o.frustumCulled=false;
       const ms=(Array.isArray(o.material)?o.material:[o.material]).map(om=>{const nm=(om.name||'').toLowerCase();
         if(/opacity|hair/.test(nm)&&key==='ceo')return new THREE.MeshBasicMaterial({name:'hair',visible:false});
-        if(/opacity|hair/.test(nm))return new THREE.MeshStandardMaterial({name:'hair',map:key==='em'?platinumTex(P+'hair.webp?v=18'):get('hair',true),alphaTest:.42,side:THREE.DoubleSide,roughness:.7,metalness:0,envMapIntensity:.25});
+        if(/opacity|hair/.test(nm))return new THREE.MeshStandardMaterial({name:'hair',map:key==='em'?platinumTex(P+'hair.webp?v=19'):get('hair',true),alphaTest:.42,side:THREE.DoubleSide,roughness:.7,metalness:0,envMapIntensity:.25});
         const part=/head/.test(nm)?'head':'body';
-        return new THREE.MeshStandardMaterial({name:part,map:(part==='head'&&FACE_TEX[key])?avTex(P+'face.webp?v=16',true):get(part,true),normalMap:get(part+'n',false),normalScale:new THREE.Vector2(.9,.9),roughness:part==='head'?.56:.78,metalness:0,envMapIntensity:.3});});
+        return new THREE.MeshStandardMaterial({name:part,map:(part==='head'&&key==='em')?darkHairTex(P+'head.webp?v=19'):get(part,true),normalMap:get(part+'n',false),normalScale:new THREE.Vector2(.9,.9),roughness:part==='head'?.56:.78,metalness:0,envMapIntensity:.3});});
       o.material=Array.isArray(o.material)?ms:ms[0];});
     const meta=avMeasure(m);
     if(meta&&meta.back.length){const pr=AV_PRINT[key]||(()=>{const c=CHARS.find(c=>c.id===key);return c&&c.look?[c.look.label,c.look.text==='#1a0b2e'||c.look.text==='#111111'||c.look.text==='#1a1a1a'?'#ffffff':c.look.text]:null;})();
-      if(pr){let bm=null;m.traverse(o=>{if(o.isMesh)(Array.isArray(o.material)?o.material:[o.material]).forEach(x=>{if(x.name==='body')bm=x;});});if(bm)printBack(bm,P+'body.webp?v=18',meta,pr[0],pr[1]);}}
+      if(pr){let bm=null;m.traverse(o=>{if(o.isMesh)(Array.isArray(o.material)?o.material:[o.material]).forEach(x=>{if(x.name==='body')bm=x;});});if(bm)printBack(bm,P+'body.webp?v=19',meta,pr[0],pr[1]);}}
     m.scale.setScalar(.01);m.updateMatrixWorld(true);
     const av={scene:m,clips:{},meta};
     if(XBOT)for(const c of XBOT.animations)if(/^(idle|run|walk)$/.test(c.name))av.clips[c.name]=retargetClip(XBOT.scene,c,m);
