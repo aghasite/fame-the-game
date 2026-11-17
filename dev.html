@@ -2186,7 +2186,7 @@ function printBack(matl,url,meta,text,col){
     const nt=new THREE.CanvasTexture(c);nt.colorSpace=THREE.SRGBColorSpace;nt.anisotropy=8;nt.flipY=true;matl.map=nt;matl.needsUpdate=true;}).catch(e=>console.warn('print',e));
 }
 const AV_PRINT={fame:['img:logos/logo_fame.webp','#111111'],ice:['img:logos/logo_chinaman.webp','#ffd23f'],ceo:['YOUNG CEO','#ffffff']};
-const FACE_TEX=window.__FACE||{em:1,biggie:1,snoop:1,pac:1,fame:1};
+const FACE_TEX=window.__FACE||{snoop:1,pac:1};
 function loadAvatar(key,cb){
   if(AV[key]){cb&&cb(AV[key]);return;}if(AV_LOADING[key]){if(cb)AV_LOADING[key].push(cb);return;}AV_LOADING[key]=cb?[cb]:[];
   fetch('avatars/'+key+'.fbx').then(r=>{if(!r.ok)throw 0;return r.arrayBuffer();}).then(buf=>{
