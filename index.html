@@ -2367,7 +2367,7 @@ function buildAvChar(av){
   if(DANCE&&!av.clips.dance){try{const dc=DANCE.animations.find(a=>/samba/i.test(a.name))||DANCE.animations[0];av.clips.dance=retargetClip(DANCE.scene,dc,av.scene);}catch(e){console.warn('dance',e);}}
   if(av.clips.dance)A.dance=mixer.clipAction(av.clips.dance);
   ['idle','run','walk','dance'].forEach(n=>{if(A[n]){A[n].play();A[n].setEffectiveWeight(0);}});if(A.idle)A.idle.setEffectiveWeight(1);
-  CH={x:true,real:true,danceT:0,root,model,mixer,A,board,jet,flames,gear,w:{idle:1,run:0,walk:0,dance:0}};tame(root);scene.add(root);window.__avReady=1;
+  CH={x:true,real:true,danceT:3.5,root,model,mixer,A,board,jet,flames,gear,w:{idle:1,run:0,walk:0,dance:0}};tame(root);scene.add(root);window.__avReady=1;
 }
 function buildXChar(){
   {const k=avKey();if(AV[k]){buildAvChar(AV[k]);return;}loadAvatar(k,()=>{if(avKey()===k)rebuildChar();});}
