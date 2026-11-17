@@ -535,8 +535,8 @@ const DECKS=[
 const CHARS=[
  {id:'fame',title:"Cape Coral's Own",name:'FAME FAIELLA',sub:'Fame Records · Cape Coral',perk:'Home turf · +10% score',p:{score:1.1}},
  {id:'ice',title:"Miami Bass Pioneer",name:'FRESH KID ICE',sub:'Chinaman Records · Miami bass legend',tribute:true,perk:'Legend · +15% coins',p:{coin:1.15}},
- {id:'snoop',title:"The Doggfather",legend:true,name:'SNOOP DOGG',sub:'Long Beach, California · West Coast legend',perk:'Laid back · magnet lasts +5s',p:{magnet:5},unlockLv:'us-CA',cost:6000,look:{hoodie:'#3a5a8a',shade:'#2a4268',text:'#ffffff',label:'SNOOP',skin:'#7a4a30',hat:false,braids:true,hair:'#141010',pants:'#c9b28a',stripe:'#ffffff',sy:1.07,sx:.95,shoes:'#ffffff'}},
- {id:'biggie',title:"King of New York",legend:true,tribute2:true,name:'THE NOTORIOUS B.I.G.',sub:'Brooklyn, New York · 1972 – 1997',perk:'King of NY · +20% score',p:{score:1.2},unlockLv:'us-NY',cost:8000,look:{hoodie:'#b8322a',shade:'#7a1f1a',text:'#ffd23f',label:'BIGGIE',skin:'#4a2c1e',hat:false,noShades:true,cap:'#1a1a1a',hair:'#111',pants:'#1c1c22',sx:1.04,sy:1,chainBig:true}},
+ {id:'snoop',title:"The Doggfather",legend:true,name:'SNOOP DOGG',sub:'Long Beach, California · West Coast legend',perk:'Laid back · magnet lasts +5s',p:{magnet:5},unlockLv:'us-CA',cost:6000,look:{hoodie:'#3a5a8a',shade:'#2a4268',text:'#ffffff',label:'SNOOP',skin:'#7a4a30',hat:false,braids:false,hair:'#141010',pants:'#c9b28a',stripe:'#ffffff',sy:1.07,sx:.95,shoes:'#ffffff'}},
+ {id:'biggie',title:"King of New York",legend:true,tribute2:true,name:'THE NOTORIOUS B.I.G.',sub:'Brooklyn, New York · 1972 – 1997',perk:'King of NY · +20% score',p:{score:1.2},unlockLv:'us-NY',cost:8000,look:{hoodie:'#b8322a',shade:'#7a1f1a',text:'#ffd23f',label:'BIGGIE',skin:'#4a2c1e',hat:false,noShades:true,cap:'#1a1a1a',hair:'#111',pants:'#1c1c22',sx:1.1,sy:1,chainBig:true}},
  {id:'pac',title:"Ride-or-Die Poet",legend:true,tribute2:true,name:'2PAC',sub:'East Harlem to the West Coast · 1971 – 1996',perk:'Ride or die · jumps 15% higher',p:{jump:1.15},unlockLv:'us-MD',cost:8000,look:{hoodie:'#f2f2f2',shade:'#cfcfcf',text:'#1a1a1a',label:'2PAC',skin:'#6b4430',hat:false,bald:true,silver:true,hair:'#111',pants:'#2f4a7a',noShades:true}},
  {id:'em',title:"Rap God",legend:true,name:'EMINEM',sub:'Detroit, Michigan · battle-rap legend',perk:'Lose yourself · on-beat bonus x2',p:{beat:2},unlockLv:'us-MI',cost:7000,look:{hoodie:'#9a9aa2',shade:'#6e6e76',text:'#111111',label:'EMINEM',skin:'#f1c6a0',hat:true,cap:'#0e0e12',plainCap:true,hair:'#2a2018',pants:'#3a4f75',noShades:true,noChain:true}},
  {id:'ceo',title:"Knockout Boss",artist:true,name:'YOUNG CEO',sub:'Boxer & rapper · Fame Records',perk:'Fight Club Energy lasts +3s',p:{fight:3},look:{hoodie:'#5a5a5e',shade:'#3e3e42',text:'#ffffff',label:'CEO',skin:'#e8c0a4',hat:false,bald:true,hair:'#141010',pants:'#5d7290',noShades:true,noChain:true}},
@@ -2100,7 +2100,7 @@ const RB_MAP={Hips:'Bip01_Pelvis',Spine:'Bip01_Spine',Spine1:'Bip01_Spine1',Spin
 const RB_CHAIN=[['LeftShoulder','LeftArm'],['LeftArm','LeftForeArm'],['LeftForeArm','LeftHand'],['RightShoulder','RightArm'],['RightArm','RightForeArm'],['RightForeArm','RightHand'],
   ['LeftUpLeg','LeftLeg'],['LeftLeg','LeftFoot'],['LeftFoot','LeftToeBase'],['RightUpLeg','RightLeg'],['RightLeg','RightFoot'],['RightFoot','RightToeBase']];
 const AV={},AV_LOADING={};const AV_TEX=new THREE.TextureLoader();
-function platinumTex(url){const t=new THREE.Texture();t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=8;const im=new Image();im.crossOrigin='anonymous';im.onload=()=>{const c=document.createElement('canvas');c.width=im.naturalWidth;c.height=im.naturalHeight;const x=c.getContext('2d');x.drawImage(im,0,0);const d=x.getImageData(0,0,c.width,c.height),q=d.data;for(let i=0;i<q.length;i+=4){const l=(q[i]*.3+q[i+1]*.59+q[i+2]*.11)/255;const k=Math.min(1,.52+l*1.15);q[i]=96*k;q[i+1]=74*k;q[i+2]=56*k;}x.putImageData(d,0,0);t.image=c;t.needsUpdate=true;};im.src=url;return t;}
+function platinumTex(url){const t=new THREE.Texture();t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=8;const im=new Image();im.crossOrigin='anonymous';im.onload=()=>{const c=document.createElement('canvas');c.width=im.naturalWidth;c.height=im.naturalHeight;const x=c.getContext('2d');x.drawImage(im,0,0);const d=x.getImageData(0,0,c.width,c.height),q=d.data;for(let i=0;i<q.length;i+=4){const l=(q[i]*.3+q[i+1]*.59+q[i+2]*.11)/255;const k=Math.min(1,.4+l*.7);q[i]=34*k;q[i+1]=27*k;q[i+2]=22*k;}x.putImageData(d,0,0);t.image=c;t.needsUpdate=true;};im.src=url;return t;}
 function avTex(u,srgb){const t=AV_TEX.load(u);if(srgb)t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=8;return t;}
 function retargetClip(srcScene,clip,tgt){
   const src=SkeletonUtils.clone(srcScene);src.updateMatrixWorld(true);
@@ -2192,18 +2192,17 @@ function loadAvatar(key,cb){
   fetch('avatars/'+key+'.fbx').then(r=>{if(!r.ok)throw 0;return r.arrayBuffer();}).then(buf=>{
     const m=new FBXLoader().parse(buf,'');m.animations.length=0;
     const P='avatars/'+key+'_';const tex={};
-    const get=(s,srgb)=>tex[s]||(tex[s]=avTex(P+s+'.webp?v=17',srgb));
+    const get=(s,srgb)=>tex[s]||(tex[s]=avTex(P+s+'.webp?v=18',srgb));
     m.traverse(o=>{if(!o.isMesh)return;o.castShadow=true;o.receiveShadow=true;o.frustumCulled=false;
       const ms=(Array.isArray(o.material)?o.material:[o.material]).map(om=>{const nm=(om.name||'').toLowerCase();
         if(/opacity|hair/.test(nm)&&key==='ceo')return new THREE.MeshBasicMaterial({name:'hair',visible:false});
-        if(/opacity|hair/.test(nm))return new THREE.MeshStandardMaterial({name:'hair',map:key==='em'?platinumTex(P+'hair.webp?v=17'):get('hair',true),alphaTest:.42,side:THREE.DoubleSide,roughness:.7,metalness:0,envMapIntensity:.25});
+        if(/opacity|hair/.test(nm))return new THREE.MeshStandardMaterial({name:'hair',map:key==='em'?platinumTex(P+'hair.webp?v=18'):get('hair',true),alphaTest:.42,side:THREE.DoubleSide,roughness:.7,metalness:0,envMapIntensity:.25});
         const part=/head/.test(nm)?'head':'body';
         return new THREE.MeshStandardMaterial({name:part,map:(part==='head'&&FACE_TEX[key])?avTex(P+'face.webp?v=16',true):get(part,true),normalMap:get(part+'n',false),normalScale:new THREE.Vector2(.9,.9),roughness:part==='head'?.56:.78,metalness:0,envMapIntensity:.3});});
       o.material=Array.isArray(o.material)?ms:ms[0];});
-    if(key==='biggie')fattenAvatar(m);
     const meta=avMeasure(m);
     if(meta&&meta.back.length){const pr=AV_PRINT[key]||(()=>{const c=CHARS.find(c=>c.id===key);return c&&c.look?[c.look.label,c.look.text==='#1a0b2e'||c.look.text==='#111111'||c.look.text==='#1a1a1a'?'#ffffff':c.look.text]:null;})();
-      if(pr){let bm=null;m.traverse(o=>{if(o.isMesh)(Array.isArray(o.material)?o.material:[o.material]).forEach(x=>{if(x.name==='body')bm=x;});});if(bm)printBack(bm,P+'body.webp?v=17',meta,pr[0],pr[1]);}}
+      if(pr){let bm=null;m.traverse(o=>{if(o.isMesh)(Array.isArray(o.material)?o.material:[o.material]).forEach(x=>{if(x.name==='body')bm=x;});});if(bm)printBack(bm,P+'body.webp?v=18',meta,pr[0],pr[1]);}}
     m.scale.setScalar(.01);m.updateMatrixWorld(true);
     const av={scene:m,clips:{},meta};
     if(XBOT)for(const c of XBOT.animations)if(/^(idle|run|walk)$/.test(c.name))av.clips[c.name]=retargetClip(XBOT.scene,c,m);
@@ -2296,7 +2295,7 @@ function buildAvChar(av){
       const bd=new THREE.Mesh(G.sph,bead);bd.scale.setScalar(.011);bd.position.copy(pts[3]);H.add(bd);}}
   fix(H,head);
   const C=new THREE.Group();
-  if(!L.noChain&&hm&&hm.neck&&hm.neck.colZ>-1e8){const nk=hm.neck,thick=L.chainBig?.0075:.0045;
+  if(L.chainOK&&!L.noChain&&hm&&hm.neck&&hm.neck.colZ>-1e8){const nk=hm.neck,thick=L.chainBig?.0075:.0045;
     const mk=(drop,spread,extraZ)=>{const pts=[cv(-spread*.85,nk.y-4,(nk.colZ+nk.bkZ)/2),cv(-spread,nk.y-7,nk.colZ-1.2),cv(-spread*.45,nk.y-drop*.7,nk.chZ+.6+extraZ),cv(0,nk.y-drop,nk.chZ+1+extraZ),cv(spread*.45,nk.y-drop*.7,nk.chZ+.6+extraZ),cv(spread,nk.y-7,nk.colZ-1.2),cv(spread*.85,nk.y-4,(nk.colZ+nk.bkZ)/2)];
       return new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts,false,'centripetal'),80,thick,6,false),gold);};
     C.add(mk(L.chainBig?19:14.5,5.6,0));if(L.label==='ICE'||L.chainBig)C.add(mk(L.chainBig?24:19,6.4,.8));
