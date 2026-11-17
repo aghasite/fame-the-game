@@ -536,9 +536,9 @@ const CHARS=[
  {id:'fame',title:"Cape Coral's Own",name:'FAME FAIELLA',sub:'Fame Records · Cape Coral',perk:'Home turf · +10% score',p:{score:1.1}},
  {id:'ice',title:"Miami Bass Pioneer",name:'FRESH KID ICE',sub:'Chinaman Records · Miami bass legend',tribute:true,perk:'Legend · +15% coins',p:{coin:1.15}},
  {id:'snoop',title:"The Doggfather",legend:true,name:'SNOOP DOGG',sub:'Long Beach, California · West Coast legend',perk:'Laid back · magnet lasts +5s',p:{magnet:5},unlockLv:'us-CA',cost:6000,look:{hoodie:'#3a5a8a',shade:'#2a4268',text:'#ffffff',label:'SNOOP',skin:'#7a4a30',hat:false,braids:true,hair:'#141010',pants:'#c9b28a',stripe:'#ffffff',sy:1.07,sx:.95,shoes:'#ffffff'}},
- {id:'biggie',title:"King of New York",legend:true,tribute2:true,name:'THE NOTORIOUS B.I.G.',sub:'Brooklyn, New York · 1972 – 1997',perk:'King of NY · +20% score',p:{score:1.2},unlockLv:'us-NY',cost:8000,look:{hoodie:'#b8322a',shade:'#7a1f1a',text:'#ffd23f',label:'BIGGIE',skin:'#4a2c1e',hat:false,kangol:true,cap:'#1a1a1a',hair:'#111',pants:'#1c1c22',sx:1.04,sy:1,chainBig:true}},
- {id:'pac',title:"Ride-or-Die Poet",legend:true,tribute2:true,name:'2PAC',sub:'East Harlem to the West Coast · 1971 – 1996',perk:'Ride or die · jumps 15% higher',p:{jump:1.15},unlockLv:'us-MD',cost:8000,look:{hoodie:'#f2f2f2',shade:'#cfcfcf',text:'#1a1a1a',label:'2PAC',skin:'#6b4430',hat:false,bandana:'#1f4fa0',hair:'#111',pants:'#2f4a7a',noShades:true}},
- {id:'em',title:"Rap God",legend:true,name:'EMINEM',sub:'Detroit, Michigan · battle-rap legend',perk:'Lose yourself · on-beat bonus x2',p:{beat:2},unlockLv:'us-MI',cost:7000,look:{hoodie:'#9a9aa2',shade:'#6e6e76',text:'#111111',label:'EMINEM',skin:'#f1c6a0',hat:false,hair:'#f0dc9a',pants:'#3a4f75',noShades:true,noChain:true}},
+ {id:'biggie',title:"King of New York",legend:true,tribute2:true,name:'THE NOTORIOUS B.I.G.',sub:'Brooklyn, New York · 1972 – 1997',perk:'King of NY · +20% score',p:{score:1.2},unlockLv:'us-NY',cost:8000,look:{hoodie:'#b8322a',shade:'#7a1f1a',text:'#ffd23f',label:'BIGGIE',skin:'#4a2c1e',hat:false,noShades:true,cap:'#1a1a1a',hair:'#111',pants:'#1c1c22',sx:1.04,sy:1,chainBig:true}},
+ {id:'pac',title:"Ride-or-Die Poet",legend:true,tribute2:true,name:'2PAC',sub:'East Harlem to the West Coast · 1971 – 1996',perk:'Ride or die · jumps 15% higher',p:{jump:1.15},unlockLv:'us-MD',cost:8000,look:{hoodie:'#f2f2f2',shade:'#cfcfcf',text:'#1a1a1a',label:'2PAC',skin:'#6b4430',hat:false,bald:true,silver:true,hair:'#111',pants:'#2f4a7a',noShades:true}},
+ {id:'em',title:"Rap God",legend:true,name:'EMINEM',sub:'Detroit, Michigan · battle-rap legend',perk:'Lose yourself · on-beat bonus x2',p:{beat:2},unlockLv:'us-MI',cost:7000,look:{hoodie:'#9a9aa2',shade:'#6e6e76',text:'#111111',label:'EMINEM',skin:'#f1c6a0',hat:true,cap:'#0e0e12',plainCap:true,hair:'#2a2018',pants:'#3a4f75',noShades:true,noChain:true}},
  {id:'ceo',title:"Knockout Boss",artist:true,name:'YOUNG CEO',sub:'Boxer & rapper · Fame Records',perk:'Fight Club Energy lasts +3s',p:{fight:3},look:{hoodie:'#5a5a5e',shade:'#3e3e42',text:'#ffffff',label:'CEO',skin:'#e8c0a4',hat:false,bald:true,hair:'#141010',pants:'#5d7290',noShades:true,noChain:true}},
  {id:'palm',title:"Bounce Prince",artist:true,name:'LIL PALMETTO',sub:'Florida bounce · Fame Records',perk:'Magnet lasts +4s',p:{magnet:4},look:{hoodie:'#3ddc97',shade:'#22a46c',text:'#3ddc97',label:'PALM',skin:'#8d5a3b',hat:false,chainBig:false,pants:'#1c2a40',hair:'#120a06'}},
  {id:'nova',title:"R&B Royalty",artist:true,name:'NOVA REIGN',sub:'R&B singer · Fame Records',perk:'2X Coins lasts +4s',p:{dbl:4},look:{hoodie:'#ff7ac3',shade:'#c94b92',text:'#ffffff',label:'NOVA',skin:'#f1c6a0',hat:false,bun:true,hair:'#5a2a12',pants:'#2b1838'}},
@@ -554,8 +554,8 @@ const ICE_LOOK={skin:'#d9a57c',skinShade:'#b9845d',hair:'#0d0d10',shoes:'#ffffff
   hoodie:'#b3121f',hoodieShade:'#7d0c15',hoodieText:'#ffd23f',cap:null,pants:'#111114',pantsShade:'#07070a',glow:'#ffd23f',label:'ICE',pendant:'ICE',stripe:'#ffd23f',hat:false,flat:true};
 let LOOK={},DECK=DECKS[0];
 function applyLook(){const cc=CHARS.find(x=>x.id===S.char);
-  if(cc&&cc.look){const k=cc.look;LOOK=Object.assign({},BASE_LOOK,{hoodie:k.hoodie,hoodieShade:k.shade,hoodieText:k.text,cap:k.cap||null,pants:k.pants,pantsShade:k.pants,glow:k.glow||null,label:k.label,pendant:k.label[0],hat:!!k.hat,flat:!!k.flat,bun:!!k.bun,skin:k.skin,skinShade:k.skin,hair:k.hair||'#111',model:k.model||null,braids:!!k.braids,kangol:!!k.kangol,bandana:k.bandana||null,noShades:!!k.noShades,noChain:!!k.noChain,bald:!!k.bald,chainBig:!!k.chainBig,sx:k.sx||1,sy:k.sy||1});if(k.stripe)LOOK.stripe=k.stripe;if(k.shoes)LOOK.shoes=k.shoes;DECK=DECKS.find(x=>x.id===S.deck)||DECKS[0];if(window.__engineReady)rebuildChar();return;}
-  if(S.char==='ice'){LOOK=Object.assign({},ICE_LOOK);DECK=DECKS.find(x=>x.id===S.deck)||DECKS[0];if(window.__engineReady)rebuildChar();return;}const o=OUTFITS.find(x=>x.id===S.outfit)||OUTFITS[0];LOOK=Object.assign({},BASE_LOOK,{hoodie:o.hoodie,hoodieShade:o.shade,hoodieText:o.text,cap:o.cap,pants:o.pants,pantsShade:o.pantsShade,glow:o.glow||null,label:'FAME',pendant:'F',hat:true});if(o.chain)LOOK.chain=o.chain;DECK=DECKS.find(x=>x.id===S.deck)||DECKS[0];if(window.__engineReady)rebuildChar();}
+  if(cc&&cc.look){const k=cc.look;LOOK=Object.assign({},BASE_LOOK,{hoodie:k.hoodie,hoodieShade:k.shade,hoodieText:k.text,cap:k.cap||null,pants:k.pants,pantsShade:k.pants,glow:k.glow||null,label:k.label,pendant:k.label[0],hat:!!k.hat,flat:!!k.flat,bun:!!k.bun,skin:k.skin,skinShade:k.skin,hair:k.hair||'#111',model:k.model||null,braids:!!k.braids,kangol:!!k.kangol,bandana:k.bandana||null,noShades:!!k.noShades,noChain:!!k.noChain,bald:!!k.bald,plainCap:!!k.plainCap,chainBig:!!k.chainBig,sx:k.sx||1,sy:k.sy||1});if(k.silver)LOOK.chain='#dfe3ea';if(k.stripe)LOOK.stripe=k.stripe;if(k.shoes)LOOK.shoes=k.shoes;DECK=DECKS.find(x=>x.id===S.deck)||DECKS[0];if(window.__engineReady)rebuildChar();return;}
+  if(S.char==='ice'){LOOK=Object.assign({},ICE_LOOK);DECK=DECKS.find(x=>x.id===S.deck)||DECKS[0];if(window.__engineReady)rebuildChar();return;}const o=OUTFITS.find(x=>x.id===S.outfit)||OUTFITS[0];LOOK=Object.assign({},BASE_LOOK,{hoodie:o.hoodie,hoodieShade:o.shade,hoodieText:o.text,cap:o.cap,pants:o.pants,pantsShade:o.pantsShade,glow:o.glow||null,label:'FAME',pendant:'F',hat:true,chainBig:true,chain:'#dfe3ea',capLogo:'#e8323c'});if(o.chain)LOOK.chain=o.chain;DECK=DECKS.find(x=>x.id===S.deck)||DECKS[0];if(window.__engineReady)rebuildChar();}
 applyLook();
 
 // ---------- Studio / label data ----------
@@ -2100,7 +2100,7 @@ const RB_MAP={Hips:'Bip01_Pelvis',Spine:'Bip01_Spine',Spine1:'Bip01_Spine1',Spin
 const RB_CHAIN=[['LeftShoulder','LeftArm'],['LeftArm','LeftForeArm'],['LeftForeArm','LeftHand'],['RightShoulder','RightArm'],['RightArm','RightForeArm'],['RightForeArm','RightHand'],
   ['LeftUpLeg','LeftLeg'],['LeftLeg','LeftFoot'],['LeftFoot','LeftToeBase'],['RightUpLeg','RightLeg'],['RightLeg','RightFoot'],['RightFoot','RightToeBase']];
 const AV={},AV_LOADING={};const AV_TEX=new THREE.TextureLoader();
-function platinumTex(url){const t=new THREE.Texture();t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=8;const im=new Image();im.crossOrigin='anonymous';im.onload=()=>{const c=document.createElement('canvas');c.width=im.naturalWidth;c.height=im.naturalHeight;const x=c.getContext('2d');x.drawImage(im,0,0);const d=x.getImageData(0,0,c.width,c.height),q=d.data;for(let i=0;i<q.length;i+=4){const l=(q[i]*.3+q[i+1]*.59+q[i+2]*.11)/255;const k=Math.min(1,.52+l*1.15);q[i]=240*k;q[i+1]=229*k;q[i+2]=190*k;}x.putImageData(d,0,0);t.image=c;t.needsUpdate=true;};im.src=url;return t;}
+function platinumTex(url){const t=new THREE.Texture();t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=8;const im=new Image();im.crossOrigin='anonymous';im.onload=()=>{const c=document.createElement('canvas');c.width=im.naturalWidth;c.height=im.naturalHeight;const x=c.getContext('2d');x.drawImage(im,0,0);const d=x.getImageData(0,0,c.width,c.height),q=d.data;for(let i=0;i<q.length;i+=4){const l=(q[i]*.3+q[i+1]*.59+q[i+2]*.11)/255;const k=Math.min(1,.52+l*1.15);q[i]=96*k;q[i+1]=74*k;q[i+2]=56*k;}x.putImageData(d,0,0);t.image=c;t.needsUpdate=true;};im.src=url;return t;}
 function avTex(u,srgb){const t=AV_TEX.load(u);if(srgb)t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=8;return t;}
 function retargetClip(srcScene,clip,tgt){
   const src=SkeletonUtils.clone(srcScene);src.updateMatrixWorld(true);
@@ -2186,23 +2186,24 @@ function printBack(matl,url,meta,text,col){
     const nt=new THREE.CanvasTexture(c);nt.colorSpace=THREE.SRGBColorSpace;nt.anisotropy=8;nt.flipY=true;matl.map=nt;matl.needsUpdate=true;}).catch(e=>console.warn('print',e));
 }
 const AV_PRINT={fame:['img:logos/logo_fame.webp','#111111'],ice:['img:logos/logo_chinaman.webp','#ffd23f'],ceo:['YOUNG CEO','#ffffff']};
+const FACE_TEX=window.__FACE||{em:1,biggie:1,snoop:1,pac:1,fame:1};
 function loadAvatar(key,cb){
   if(AV[key]){cb&&cb(AV[key]);return;}if(AV_LOADING[key]){if(cb)AV_LOADING[key].push(cb);return;}AV_LOADING[key]=cb?[cb]:[];
   fetch('avatars/'+key+'.fbx').then(r=>{if(!r.ok)throw 0;return r.arrayBuffer();}).then(buf=>{
     const m=new FBXLoader().parse(buf,'');m.animations.length=0;
     const P='avatars/'+key+'_';const tex={};
-    const get=(s,srgb)=>tex[s]||(tex[s]=avTex(P+s+'.webp?v=13',srgb));
+    const get=(s,srgb)=>tex[s]||(tex[s]=avTex(P+s+'.webp?v=15',srgb));
     m.traverse(o=>{if(!o.isMesh)return;o.castShadow=true;o.receiveShadow=true;o.frustumCulled=false;
       const ms=(Array.isArray(o.material)?o.material:[o.material]).map(om=>{const nm=(om.name||'').toLowerCase();
         if(/opacity|hair/.test(nm)&&key==='ceo')return new THREE.MeshBasicMaterial({name:'hair',visible:false});
-        if(/opacity|hair/.test(nm))return new THREE.MeshStandardMaterial({name:'hair',map:key==='em'?platinumTex(P+'hair.webp?v=13'):get('hair',true),alphaTest:.42,side:THREE.DoubleSide,roughness:.7,metalness:0,envMapIntensity:.25});
+        if(/opacity|hair/.test(nm))return new THREE.MeshStandardMaterial({name:'hair',map:key==='em'?platinumTex(P+'hair.webp?v=15'):get('hair',true),alphaTest:.42,side:THREE.DoubleSide,roughness:.7,metalness:0,envMapIntensity:.25});
         const part=/head/.test(nm)?'head':'body';
-        return new THREE.MeshStandardMaterial({name:part,map:get(part,true),normalMap:get(part+'n',false),normalScale:new THREE.Vector2(.9,.9),roughness:part==='head'?.56:.78,metalness:0,envMapIntensity:.3});});
+        return new THREE.MeshStandardMaterial({name:part,map:(part==='head'&&FACE_TEX[key])?avTex(P+'face.webp?v=16',true):get(part,true),normalMap:get(part+'n',false),normalScale:new THREE.Vector2(.9,.9),roughness:part==='head'?.56:.78,metalness:0,envMapIntensity:.3});});
       o.material=Array.isArray(o.material)?ms:ms[0];});
     if(key==='biggie')fattenAvatar(m);
     const meta=avMeasure(m);
     if(meta&&meta.back.length){const pr=AV_PRINT[key]||(()=>{const c=CHARS.find(c=>c.id===key);return c&&c.look?[c.look.label,c.look.text==='#1a0b2e'||c.look.text==='#111111'||c.look.text==='#1a1a1a'?'#ffffff':c.look.text]:null;})();
-      if(pr){let bm=null;m.traverse(o=>{if(o.isMesh)(Array.isArray(o.material)?o.material:[o.material]).forEach(x=>{if(x.name==='body')bm=x;});});if(bm)printBack(bm,P+'body.webp?v=13',meta,pr[0],pr[1]);}}
+      if(pr){let bm=null;m.traverse(o=>{if(o.isMesh)(Array.isArray(o.material)?o.material:[o.material]).forEach(x=>{if(x.name==='body')bm=x;});});if(bm)printBack(bm,P+'body.webp?v=15',meta,pr[0],pr[1]);}}
     m.scale.setScalar(.01);m.updateMatrixWorld(true);
     const av={scene:m,clips:{},meta};
     if(XBOT)for(const c of XBOT.animations)if(/^(idle|run|walk)$/.test(c.name))av.clips[c.name]=retargetClip(XBOT.scene,c,m);
@@ -2280,8 +2281,8 @@ function buildAvChar(av){
     const band=new THREE.Mesh(new THREE.CylinderGeometry(1,1,.022,28,1,true),capM);band.scale.set(rx,1,rz);band.position.set(hc.x,base+.004,hc.z);H.add(band);
     const brim=new THREE.Mesh(new THREE.CylinderGeometry(1,1,.008,28,1,false,Math.PI/2,Math.PI),capM);brim.scale.set(rx*1.02,1,rz*.85);brim.position.set(hc.x,base-.004,hc.z-rz*.82);brim.castShadow=true;H.add(brim);
     const btn=new THREE.Mesh(G.sph,capM);btn.scale.setScalar(.011);btn.position.set(hc.x,base+.1,hc.z);H.add(btn);
-    const logo=new THREE.Mesh(new THREE.PlaneGeometry(rx*1.25,rx*.62),new THREE.MeshStandardMaterial({map:labelTex(L.label==='FAME'?'FAME':(L.label||'F'),L.capLogo),transparent:true,depthWrite:false,roughness:.6}));
-    logo.position.set(hc.x,base+.045,hc.z-rz*.93);logo.rotation.set(.38,Math.PI,0);H.add(logo);}
+    if(!L.plainCap){const logo=new THREE.Mesh(new THREE.PlaneGeometry(rx*1.25,rx*.62),new THREE.MeshStandardMaterial({map:labelTex(L.label==='FAME'?'FAME':(L.label||'F'),L.capLogo),transparent:true,depthWrite:false,roughness:.6}));
+    logo.position.set(hc.x,base+.045,hc.z-rz*.93);logo.rotation.set(.38,Math.PI,0);H.add(logo);}}
   else if(L.kangol){const kg=new THREE.Mesh(new THREE.SphereGeometry(1,28,14,0,Math.PI*2,0,Math.PI/1.9),capM);kg.scale.set(rx*1.08,.105,rz*1.06);kg.position.set(hc.x,base+.005,hc.z);H.add(kg);
     const rim=new THREE.Mesh(new THREE.CylinderGeometry(1,1.04,.018,30),capM);rim.scale.set(rx*1.22,1,rz*1.2);rim.position.set(hc.x,base,hc.z);H.add(rim);}
   else if(L.bandana){const bm=mat(L.bandana,{r:.85});const bb=base+.012;const bd=new THREE.Mesh(new THREE.SphereGeometry(1,28,14,0,Math.PI*2,0,Math.PI/2),bm);bd.scale.set(rx*.9,.086,rz*.92);bd.position.set(hc.x,bb,hc.z);H.add(bd);
