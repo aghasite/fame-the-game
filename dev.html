@@ -2180,10 +2180,12 @@ function avMeasure(m){
   const back=backRect(Ht*.735,Ht*.15,Ht*.062),backL=backRect(Ht*.69,Ht*.19,Ht*.19);
   return {head,back,backL,height:Ht,face,eXs};
 }
-function printBack(matl,url,meta,text,col){
+const OUTFIT={em:'#16161a',fame:'#131316',biggie:'#6e1522',snoop:'#ececf0',agha:'#1c2a4a'};
+function printBack(matl,url,meta,text,col,tint){
   const img=new Image();img.crossOrigin='anonymous';img.src=url;const isImg=typeof text==='string'&&text.startsWith('img:');const li=new Image();if(isImg){li.src=text.slice(4);}
   Promise.all([img.decode(),isImg?li.decode():0,document.fonts?document.fonts.load('bold 120px Bungee').catch(()=>0):0]).then(()=>{
     const BW=img.naturalWidth,BH=img.naturalHeight,c=document.createElement('canvas');c.width=BW;c.height=BH;const x=c.getContext('2d');x.drawImage(img,0,0);
+    if(tint){const tc0=new THREE.Color(tint),tr=tc0.r*255,tg=tc0.g*255,tb=tc0.b*255;const idd=x.getImageData(0,0,BW,BH),q=idd.data;for(let i=0;i<q.length;i+=4){const r=q[i],g=q[i+1],b=q[i+2];if(r>60&&r>g+6&&g>=b-4&&(r-b)>24)continue;const l=(r*.3+g*.59+b*.11)/255,k=.45+l*1.05;q[i]=Math.min(255,tr*k+l*18);q[i+1]=Math.min(255,tg*k+l*18);q[i+2]=Math.min(255,tb*k+l*18);}x.putImageData(idd,0,0);}
     const TW=640,TH=isImg?640:Math.round(640*.062/.15),tc=document.createElement('canvas');tc.width=TW;tc.height=TH;const t=tc.getContext('2d');
     if(isImg){const sc=Math.min(TW*.96/li.naturalWidth,TH*.96/li.naturalHeight),w=li.naturalWidth*sc,h=li.naturalHeight*sc;const lc=document.createElement('canvas');lc.width=TW;lc.height=TH;const lx=lc.getContext('2d');lx.drawImage(li,(TW-w)/2,(TH-h)/2,w,h);lx.globalCompositeOperation='source-in';lx.fillStyle=col==='#fff'?'#ffffff':col;lx.fillRect(0,0,TW,TH);
       for(const [dx,dy] of [[-4,0],[4,0],[0,-4],[0,4],[-3,-3],[3,3],[-3,3],[3,-3]])t.drawImage(lc,dx,dy);t.shadowColor='rgba(0,0,0,.6)';t.shadowBlur=8;t.drawImage(li,(TW-w)/2,(TH-h)/2,w,h);meta={back:meta.backL};}
@@ -2199,7 +2201,7 @@ function printBack(matl,url,meta,text,col){
 }
 const AV_PRINT={fame:['img:logos/logo_fame.webp','#111111'],ice:['img:logos/logo_chinaman.webp','#ffd23f'],agha:['img:logos/logo_anm.webp','#111111'],ceo:['YOUNG CEO','#ffffff']};
 const FACE_TEX={};
-const FACE_PH={em:{lm:[[174,228],[308,206],[248,354]],top:.95,rx:1.08,rb:1.62,eye:.5},biggie:{lm:[[193,207],[321,207],[281,316]],top:1.15,eye:1,rx:.85},snoop:{lm:[[190,191],[318,180],[264,304]],top:1.3},pac:{lm:[[175,218],[310,216],[250,367]],top:1.4},fame:{lm:[[193,207],[321,202],[261,325]],top:.7,rb:1.5},ice:{lm:[[162,255],[293,201],[281,382]],top:1.4}};
+const FACE_PH={agha:{lm:[[192,208],[320,204],[256,352]],top:1.0,rb:1.5},em:{lm:[[174,228],[308,206],[248,354]],top:.95,rx:1.08,rb:1.62,eye:.5},snoop:{lm:[[190,191],[318,180],[264,304]],top:1.3},pac:{lm:[[175,218],[310,216],[250,367]],top:1.4},fame:{lm:[[193,207],[321,202],[261,325]],top:.7,rb:1.5},ice:{lm:[[162,255],[293,201],[281,382]],top:1.4}};
 if(/[?&]nofaces/.test(location.search))for(const k in FACE_PH)delete FACE_PH[k];
 // project a front photo onto the 3D face (in model space, not UV space) and feather it into the head skin
 function faceProject(matl,baseUrl,key,meta){const cfg=FACE_PH[key];if(!cfg||!meta||!meta.face||!meta.face.length||!meta.eXs)return;
@@ -2239,7 +2241,7 @@ function loadAvatar(key,cb){
       o.material=Array.isArray(o.material)?ms:ms[0];});
     const meta=avMeasure(m);
     if(meta&&meta.back.length){const pr=AV_PRINT[key]||(()=>{const c=CHARS.find(c=>c.id===key);return c&&c.look?[c.look.label,c.look.text==='#1a0b2e'||c.look.text==='#111111'||c.look.text==='#1a1a1a'?'#ffffff':c.look.text]:null;})();
-      if(pr){let bm=null;m.traverse(o=>{if(o.isMesh)(Array.isArray(o.material)?o.material:[o.material]).forEach(x=>{if(x.name==='body')bm=x;});});if(bm)printBack(bm,P+'body.webp?v=19',meta,pr[0],pr[1]);}}
+      if(pr){let bm=null;m.traverse(o=>{if(o.isMesh)(Array.isArray(o.material)?o.material:[o.material]).forEach(x=>{if(x.name==='body')bm=x;});});if(bm)printBack(bm,P+'body.webp?v=19',meta,pr[0],pr[1],OUTFIT[key]);}}
     if(FACE_PH[key]&&meta){let hm0=null;m.traverse(o=>{if(o.isMesh)(Array.isArray(o.material)?o.material:[o.material]).forEach(x=>{if(x.name==='head')hm0=x;});});if(hm0)faceProject(hm0,P+'head.webp?v=19',key,meta);}
     m.scale.setScalar(.01);m.updateMatrixWorld(true);
     const av={scene:m,clips:{},meta};
@@ -2358,7 +2360,7 @@ function buildAvChar(av){
   if(DANCE&&!av.clips.dance){try{const dc=DANCE.animations.find(a=>/samba/i.test(a.name))||DANCE.animations[0];av.clips.dance=retargetClip(DANCE.scene,dc,av.scene);}catch(e){console.warn('dance',e);}}
   if(av.clips.dance)A.dance=mixer.clipAction(av.clips.dance);
   ['idle','run','walk','dance'].forEach(n=>{if(A[n]){A[n].play();A[n].setEffectiveWeight(0);}});if(A.idle)A.idle.setEffectiveWeight(1);
-  CH={x:true,real:true,danceT:3.5,root,model,mixer,A,board,jet,flames,gear,w:{idle:1,run:0,walk:0,dance:0}};tame(root);scene.add(root);window.__avReady=1;
+  CH={x:true,real:true,danceT:0,root,model,mixer,A,board,jet,flames,gear,w:{idle:1,run:0,walk:0,dance:0}};tame(root);scene.add(root);window.__avReady=1;
 }
 function buildXChar(){
   {const k=avKey();if(AV[k]){buildAvChar(AV[k]);return;}loadAvatar(k,()=>{if(avKey()===k)rebuildChar();});}
@@ -2556,7 +2558,11 @@ function animChar(dt){
 // ---------- camera ----------
 const V3=THREE.Vector3;
 const camPos=new V3(0,1.6,-9),camLook=new V3(0,1.1,-PZ);let camRoll=0,fovKick=0;
-function poseMenu(){const a=Math.PI+Math.sin(T*.22)*.5,r=6.1;return {p:new V3(Math.sin(a)*r,1.45+Math.sin(T*.37)*.1,-PZ+Math.cos(a)*r),l:new V3(0,.5,-PZ)};}
+let menuYaw=0,menuDrag=null,menuIdle=0;
+addEventListener('pointerdown',e=>{if(mode!=='menu')return;const t=e.target;if(t&&t.closest&&t.closest('button,.btn,#charbar,.iconrow,.topbtns,.panel,#evPill'))return;menuDrag={x:e.clientX};});
+addEventListener('pointermove',e=>{if(!menuDrag||mode!=='menu')return;menuYaw-=(e.clientX-menuDrag.x)*.012;menuDrag.x=e.clientX;menuIdle=T;});
+addEventListener('pointerup',()=>{menuDrag=null;});addEventListener('pointercancel',()=>{menuDrag=null;});
+function poseMenu(){if(!menuDrag&&T-menuIdle>4)menuYaw*=.97;const a=Math.PI+Math.sin(T*.22)*.5+menuYaw,r=6.1;return {p:new V3(Math.sin(a)*r,1.45+Math.sin(T*.37)*.1,-PZ+Math.cos(a)*r),l:new V3(0,.5,-PZ)};}
 function posePlay(){const jy=R.jet>0&&!(R.segKind==='tunnel'&&inSeg(R.dist+PZ,6))?1.4:0;const up=(R.jet>0||(R.segKind==='tunnel'&&inSeg(R.dist+PZ,8)))?0:clamp((R.y-.9)/.9);return {p:new V3(R.x*.6,2.7+Math.max(0,R.y-.3)*(.6+.4*up)+up*.9+jy,-PZ+4.6+up*1.1+(R.alive?0:-2)),l:new V3(R.x*.8,.85+R.y*(.55+.25*up)+jy*.3,-(PZ+9+up*3))};}
 function updateCamera(dt){
   const playing=mode==='play'||mode==='pause'||mode==='revive'||mode==='over';
@@ -2959,8 +2965,8 @@ function updatePaps(dt){
   const target=!playing?12:(!R.alive&&R.caught?.9:(R.chase>0?1.5+Math.max(0,(3.2-R.chase))*.05:12));
   R.chaseGap=lerp(R.chaseGap??12,target,Math.min(1,dt*(target<R.chaseGap?2.2:.9)));
   for(const p of PAPS){const vis=playing&&R.chaseGap<10;p.g.visible=vis;if(!vis)continue;
-    p.g.position.set(R.x+p.side*.95,R.alive?0:0,-(PZ-R.chaseGap-(p.side>0?.6:0)));
-    const ph=R.anim+(p.side>0?1.3:0);if(!p.mixer){p.legs[0].rotation.x=Math.sin(ph)*.9;p.legs[1].rotation.x=-Math.sin(ph)*.9;p.g.position.y=Math.abs(Math.cos(ph))*.06;}
+    p.py=lerp(p.py||0,Math.max(0,R.y),Math.min(1,dt*5));p.g.position.set(R.x+p.side*.42,p.py,-(PZ-R.chaseGap-(p.side>0?.9:0)));
+    const ph=R.anim+(p.side>0?1.3:0);if(!p.mixer){p.legs[0].rotation.x=Math.sin(ph)*.9;p.legs[1].rotation.x=-Math.sin(ph)*.9;}
     p.flT-=dt;if(p.flT<0&&R.chase>0){p.flT=rnd(.25,.7);p.fl.material.opacity=1;if(AC)noise(AC.currentTime,.05,3000,.12,sfxBus);flash=Math.max(flash,.12);}
     p.fl.material.opacity=Math.max(0,p.fl.material.opacity-dt*6);}
 }
